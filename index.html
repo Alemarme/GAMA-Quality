@@ -1178,7 +1178,7 @@
 
         const GOOGLE_SHEETS_EVALUACIONES_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzF9hp3fXVAHfacF5s2OkZ6bHoyKD2-_eLEJxUhaFzwffosxhl_HV1jZV4ujOCCnnMK/exec';
 
-        const AUDIT_DELETE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbygz4pK05YI8tAWDsaImeEZP5g_TwoT8vVQ6LCHeohfaS8OilmS5o85ErOaKLbjRpXg9Q/exec';
+        const AUDIT_DELETE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxh5FVFOqv-Q1C7ppZeGygpORCFtGis5pZYlxNlQagtXvY2vWLTJ-ori3KYUOXqWZSMyw/exec';
         const EMAIL_AUDITORIA_BORRADO = 'digitalentrepreneurhn@gmail.com';
 
         const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1708,17 +1708,18 @@
             btn.disabled = true;
             btn.textContent = 'Enviando invitación...';
 
-            const fechaCalibTexto = new Date(fechaCalibVal).toLocaleString();
+            const fechaCalibTexto = new Date(fechaCalibVal).toLocaleString('es-HN', {
+                weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'
+            });
+
             const payload = {
                 tipo_envio: 'invitacion_calibracion_lider',
+                correo_lider: correoLider,
                 correo_destino: correoLider,
                 nombre_lider: opt.dataset.nombre || opt.text,
-                rol_lider: opt.dataset.rol || '',
                 tipo_calibracion: tipoCalib,
                 fecha_hora_calibracion: fechaCalibTexto,
                 fecha_hora_limite_envio_eval: fechaLimiteTexto,
-                regla_plazo: '7 días hábiles antes de la sesión de calibración',
-                mensaje_cuerpo: `Hola ${opt.dataset.nombre}, has sido asignado como Líder de Calibración (${tipoCalib}) programada para el ${fechaCalibTexto}. Por favor envía por correo el número de evaluación a subir para calibrar a más tardar el ${fechaLimiteTexto} (7 días hábiles antes de la sesión).`,
                 notas_adicionales: notas,
                 enviado_por: `${perfilActual.nombre_completo} (${perfilActual.correo})`
             };
