@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -342,6 +341,127 @@
                             <tbody id="tbody-dashboard-dinamico" class="divide-y divide-slate-200 text-sm"></tbody>
                         </table>
                     </div>
+                </div>
+            </section>
+
+            <section id="tab-calibracion" class="hidden space-y-6">
+                <div class="bg-white p-4 rounded-2xl border border-purple-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center">
+                            <i data-lucide="sliders" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-900">Módulo de Calibración</h2>
+                            <p class="text-xs text-slate-500">Sincronización de criterios y auditoría conjunta de evaluaciones</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" id="btn-subtab-calib-crear" onclick="cambiarSubtabCalibracion('crear')"
+                            class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Crear Sesión de Calibración
+                        </button>
+                        <button type="button" id="btn-subtab-calib-queues" onclick="cambiarSubtabCalibracion('queues')"
+                            class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-4 h-4"></i> Queues de Calibración
+                        </button>
+                    </div>
+                </div>
+
+                <div id="subtab-calib-crear" class="bg-white p-6 rounded-2xl border border-purple-200 shadow-sm space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h3 class="text-base font-bold text-purple-950">Configurar Sesión de Calibración</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Selecciona al líder participante e ingresa el número de evaluación existente para precargar sus datos en las Queues.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">1. Seleccionar Líder (Supervisor / TL / Manager) *</label>
+                            <select id="calib-select-lider" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm font-medium focus:ring-2 focus:ring-purple-600 outline-none">
+                                <option value="">Selecciona un líder...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">2. Número de Evaluación (#) *</label>
+                            <input type="number" id="calib-input-num-eval" min="1" placeholder="Ej. 15"
+                                class="w-full px-3 py-2.5 rounded-lg border border-slate-300 text-sm font-mono font-bold focus:ring-2 focus:ring-purple-600 outline-none">
+                        </div>
+                        <div>
+                            <button type="button" onclick="cargarEvaluacionParaCalibracion()"
+                                class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-2.5 px-4 rounded-lg text-sm shadow transition flex items-center justify-center gap-2">
+                                <i data-lucide="search" class="w-4 h-4"></i> Cargar Información en Queues
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="calib-preview-card" class="hidden bg-purple-50/60 border border-purple-200 rounded-xl p-5 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-purple-200 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-purple-700 text-white text-xs font-extrabold px-3 py-1 rounded-full" id="calib-prev-badge-num">#0</span>
+                                <span class="text-xs font-bold text-purple-900" id="calib-prev-lider-label">Líder: -</span>
+                            </div>
+                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+                                ✓ Información lista en Queues de Calibración
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Agente a Evaluar (Roster)</span>
+                                <strong id="calib-prev-agente" class="text-slate-900 text-sm">-</strong>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Código / Skill / Site</span>
+                                <strong id="calib-prev-codigo-site" class="text-slate-800">-</strong>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Supervisor / Manager / Cliente</span>
+                                <strong id="calib-prev-lideres" class="text-slate-800">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Campaña / Skill</span>
+                                <strong id="calib-prev-skill" class="text-slate-800">-</strong>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Tipo de Form (Rúbrica)</span>
+                                <strong id="calib-prev-form" class="text-slate-800">-</strong>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">ID Audio / Interacción</span>
+                                <strong id="calib-prev-audio" class="font-mono text-purple-800">-</strong>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <span class="text-slate-400 block">Fecha y Hora de Interacción</span>
+                                <strong id="calib-prev-fecha" class="text-slate-800">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-2">
+                            <button type="button" onclick="cambiarSubtabCalibracion('queues')"
+                                class="bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-sm flex items-center gap-1.5">
+                                Ir a Queues de Calibración <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="subtab-calib-queues" class="hidden space-y-5">
+                    <div class="bg-purple-950 text-white p-5 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div>
+                            <h3 class="font-bold text-base">Queues de Calibración</h3>
+                            <p id="calib-queues-banner-info" class="text-xs text-purple-200 mt-0.5">
+                                Ninguna evaluación precargada aún. Puedes cargar una en "Crear Sesión de Calibración" o iniciar en blanco.
+                            </p>
+                        </div>
+                        <button type="button" onclick="limpiarContextoCalibracion()" id="btn-limpiar-calib-ctx"
+                            class="hidden bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
+                            Limpiar Precarga
+                        </button>
+                    </div>
+
+                    <div id="grid-queues-calibracion" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
                 </div>
             </section>
 
@@ -1073,6 +1193,7 @@
 
         const NOMBRES_PANTALLAS = {
             'tab-mis-metricas': 'Mis Métricas y Evaluaciones',
+            'tab-calibracion': 'Calibración',
             'tab-ver-evaluaciones': 'Ver Evaluaciones',
             'tab-nueva-eval': 'Nueva Evaluación',
             'tab-admin': 'Administración (Skills y Usuarios)',
@@ -1134,6 +1255,285 @@
                 subcategorias: ['Crear nueva evaluación']
             }
         ];
+
+        const QUEUES_CALIBRACION = [
+            {
+                canal: 'Voice',
+                titulo: 'Queue: Voice (Llamadas)',
+                icono: 'phone-call',
+                subcategorias: ['Crear nueva evaluación', 'Crear nueva TL']
+            },
+            {
+                canal: 'Chat',
+                titulo: 'Queue: Chat en Vivo',
+                icono: 'message-square',
+                subcategorias: ['Crear nueva evaluación', 'Crear nueva TL']
+            },
+            {
+                canal: 'Email',
+                titulo: 'Queue: Email / Correo',
+                icono: 'mail',
+                subcategorias: ['Crear nueva evaluación', 'Crear nueva TL']
+            },
+            {
+                canal: 'WhatsApp',
+                titulo: 'Queue: WhatsApp Business',
+                icono: 'smartphone',
+                subcategorias: ['Crear nueva evaluación', 'Crear nueva TL']
+            },
+            {
+                canal: 'Back Office/Ticket',
+                titulo: 'Queue: Back Office / Ticket',
+                icono: 'layers',
+                subcategorias: ['Crear nueva evaluación', 'Crear nueva TL']
+            },
+            {
+                canal: 'Auditorias',
+                titulo: 'Queue: Auditorías',
+                icono: 'clipboard-check',
+                subcategorias: ['Crear nueva evaluación']
+            },
+            {
+                canal: 'CSAT',
+                titulo: 'Queue: Encuestas CSAT',
+                icono: 'smile',
+                subcategorias: ['Crear nueva evaluación']
+            }
+        ];
+
+        let sesionCalibracionActiva = null;
+
+        function inicializarVistaCalibracion() {
+            poblarSelectorLideresCalibracion();
+            renderizarQueuesCalibracion();
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function cambiarSubtabCalibracion(subtab) {
+            const esCrear = subtab === 'crear';
+            document.getElementById('subtab-calib-crear').classList.toggle('hidden', !esCrear);
+            document.getElementById('subtab-calib-queues').classList.toggle('hidden', esCrear);
+
+            const btnCrear = document.getElementById('btn-subtab-calib-crear');
+            const btnQueues = document.getElementById('btn-subtab-calib-queues');
+
+            if (esCrear) {
+                btnCrear.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5';
+                btnQueues.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5';
+            } else {
+                btnQueues.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5';
+                btnCrear.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5';
+                renderizarQueuesCalibracion();
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function poblarSelectorLideresCalibracion() {
+            const sel = document.getElementById('calib-select-lider');
+            if (!sel) return;
+            const valorPrevio = sel.value;
+            sel.innerHTML = '<option value="">Selecciona un líder...</option>';
+
+            const lideresDB = usuariosCache.filter(u =>
+                ['Supervisor', 'Supervisor QA', 'Team Lead', 'Team_Lead', 'Manager'].includes(u.rol)
+            );
+
+            if (lideresDB.length > 0) {
+                lideresDB.forEach(l => {
+                    sel.innerHTML += `<option value="${l.nombre_completo} (${l.rol})">${l.nombre_completo} · ${l.rol}</option>`;
+                });
+            } else {
+                const lideresRoster = [...new Set(ROSTER_DATA_PRUEBA.flatMap(r => [r.supervisor, r.manager]))];
+                lideresRoster.forEach(nombre => {
+                    sel.innerHTML += `<option value="${nombre}">${nombre}</option>`;
+                });
+            }
+            if (valorPrevio) sel.value = valorPrevio;
+        }
+
+        async function cargarEvaluacionParaCalibracion() {
+            const lider = document.getElementById('calib-select-lider').value;
+            const numEval = parseInt(document.getElementById('calib-input-num-eval').value, 10);
+
+            if (!lider) {
+                alert('Por favor selecciona al líder participante de la calibración.');
+                return;
+            }
+            if (!numEval || numEval < 1) {
+                alert('Ingresa un número de evaluación válido.');
+                return;
+            }
+
+            let evalEncontrada = evaluacionesCache.find(e => Number(e.numero_evaluacion) === numEval);
+
+            if (!evalEncontrada) {
+                const { data } = await sb.from('evaluaciones')
+                    .select('*, agente:usuarios!evaluaciones_agente_id_fkey(nombre_completo, site, codigo_empleado, supervisor_id), qa:usuarios!evaluaciones_qa_id_fkey(nombre_completo)')
+                    .eq('numero_evaluacion', numEval)
+                    .maybeSingle();
+                evalEncontrada = data;
+            }
+
+            if (!evalEncontrada) {
+                alert(`No se encontró ninguna evaluación con el número #${numEval}.`);
+                return;
+            }
+
+            let rosterCod = '';
+            let agenteNombre = 'Sin asignar';
+            let codigoSiteText = 'Se llena desde Roster';
+            let lideresText = 'Se llena desde Roster';
+
+            if (evalEncontrada.evidencia_url_o_texto && evalEncontrada.evidencia_url_o_texto.startsWith('ROSTER:')) {
+                rosterCod = evalEncontrada.evidencia_url_o_texto.split('|')[0].replace('ROSTER:', '').trim();
+                const ag = ROSTER_DATA_PRUEBA.find(x => x.codigo === rosterCod);
+                if (ag) {
+                    agenteNombre = `${ag.nombre} (${ag.codigo})`;
+                    codigoSiteText = `${ag.codigo} | ${ag.skill} (${ag.rol}) | Site: ${ag.site}`;
+                    lideresText = `Sup: ${ag.supervisor} | Mgr: ${ag.manager} | Client: ${ag.client}`;
+                } else {
+                    const partes = evalEncontrada.evidencia_url_o_texto.split('|').map(s => s.trim());
+                    agenteNombre = partes[1] || rosterCod;
+                    codigoSiteText = partes[3] || '';
+                    lideresText = partes[2] || '';
+                }
+            } else if (evalEncontrada.agente) {
+                agenteNombre = evalEncontrada.agente.nombre_completo;
+                codigoSiteText = `${evalEncontrada.agente.codigo_empleado || ''} | Site: ${evalEncontrada.agente.site || 'N/A'}`;
+            }
+
+            const selSkillEl = document.getElementById('eval-skill');
+            const skillOpt = Array.from(selSkillEl?.options || []).find(o => o.value === evalEncontrada.skill_id);
+            const skillNombre = skillOpt ? skillOpt.text : (evalEncontrada.skill_id || 'N/A');
+
+            const formObj = rubricasCache.find(f => f.id === evalEncontrada.formulario_id);
+            const formNombre = formObj ? formObj.nombre_form : 'Estándar';
+
+            sesionCalibracionActiva = {
+                lider: lider,
+                numero_evaluacion: evalEncontrada.numero_evaluacion,
+                rosterCod: rosterCod,
+                agenteNombre: agenteNombre,
+                codigoSiteText: codigoSiteText,
+                lideresText: lideresText,
+                skill_id: evalEncontrada.skill_id,
+                skillNombre: skillNombre,
+                formulario_id: evalEncontrada.formulario_id,
+                formNombre: formNombre,
+                id_interaccion_audio: evalEncontrada.id_interaccion_audio || '',
+                fecha_interaccion: evalEncontrada.fecha_interaccion || ''
+            };
+
+            document.getElementById('calib-prev-badge-num').textContent = `#${sesionCalibracionActiva.numero_evaluacion}`;
+            document.getElementById('calib-prev-lider-label').textContent = `Líder: ${lider}`;
+            document.getElementById('calib-prev-agente').textContent = agenteNombre;
+            document.getElementById('calib-prev-codigo-site').textContent = codigoSiteText;
+            document.getElementById('calib-prev-lideres').textContent = lideresText;
+            document.getElementById('calib-prev-skill').textContent = skillNombre;
+            document.getElementById('calib-prev-form').textContent = formNombre;
+            document.getElementById('calib-prev-audio').textContent = sesionCalibracionActiva.id_interaccion_audio || 'N/A';
+            document.getElementById('calib-prev-fecha').textContent = sesionCalibracionActiva.fecha_interaccion
+                ? new Date(sesionCalibracionActiva.fecha_interaccion).toLocaleString()
+                : 'N/A';
+
+            document.getElementById('calib-preview-card').classList.remove('hidden');
+            renderizarQueuesCalibracion();
+        }
+
+        function limpiarContextoCalibracion() {
+            sesionCalibracionActiva = null;
+            document.getElementById('calib-preview-card').classList.add('hidden');
+            document.getElementById('calib-input-num-eval').value = '';
+            renderizarQueuesCalibracion();
+        }
+
+        function renderizarQueuesCalibracion() {
+            const grid = document.getElementById('grid-queues-calibracion');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const banner = document.getElementById('calib-queues-banner-info');
+            const btnLimpiar = document.getElementById('btn-limpiar-calib-ctx');
+
+            if (sesionCalibracionActiva) {
+                banner.innerHTML = `Precargada Eval <strong>#${sesionCalibracionActiva.numero_evaluacion}</strong> · Agente: <strong>${sesionCalibracionActiva.agenteNombre}</strong> · Líder: <strong>${sesionCalibracionActiva.lider}</strong>`;
+                btnLimpiar.classList.remove('hidden');
+            } else {
+                banner.textContent = 'Ninguna evaluación precargada aún. Puedes cargar una en "Crear Sesión de Calibración" o iniciar en blanco.';
+                btnLimpiar.classList.add('hidden');
+            }
+
+            QUEUES_CALIBRACION.forEach(cat => {
+                const linksHtml = cat.subcategorias.map(sub => {
+                    const esTL = sub.includes('TL');
+                    return `<button type="button" onclick="iniciarCalibracionDesdeQueue('${cat.canal}', '${sub}')"
+                        class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold ${esTL ? 'bg-fuchsia-100/80 text-fuchsia-900 border-fuchsia-300 hover:bg-fuchsia-700' : 'bg-white text-purple-900 border-purple-200 hover:bg-purple-700'} hover:text-white border transition flex items-center justify-between group shadow-2xs">
+                        <span>${sub}</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-purple-400 group-hover:text-white"></i>
+                    </button>`;
+                }).join('');
+
+                grid.innerHTML += `
+                    <div class="bg-purple-50/75 rounded-2xl border-2 border-purple-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-purple-200/80 text-purple-800 flex items-center justify-center">
+                                    <i data-lucide="${cat.icono}" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-purple-950 text-sm">${cat.titulo}</h3>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-600">Calibración</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">${linksHtml}</div>
+                        </div>
+                    </div>`;
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        async function iniciarCalibracionDesdeQueue(canal, subtipo) {
+            const ahoraIso = new Date().toISOString();
+            const defaultFormId = (sesionCalibracionActiva?.formulario_id) || (rubricasCache.length > 0 ? rubricasCache[0].id : null);
+
+            const datosIniciales = {
+                qa_id: perfilActual.id,
+                canal: canal,
+                subtipo_evaluacion: `Calibración · ${subtipo}`,
+                es_calibracion: true,
+                estado: 'iniciada',
+                formulario_id: defaultFormId,
+                fecha_creacion_inicio: ahoraIso,
+                selecciones_criterios: [],
+                puntaje_ponderado: 100,
+                falla_critica: false,
+                calificacion_final: 100
+            };
+
+            if (sesionCalibracionActiva) {
+                datosIniciales.skill_id = sesionCalibracionActiva.skill_id || null;
+                datosIniciales.id_interaccion_audio = sesionCalibracionActiva.id_interaccion_audio || null;
+                datosIniciales.fecha_interaccion = sesionCalibracionActiva.fecha_interaccion || null;
+                if (sesionCalibracionActiva.rosterCod) {
+                    datosIniciales.evidencia_url_o_texto = `ROSTER:${sesionCalibracionActiva.rosterCod} | ${sesionCalibracionActiva.agenteNombre} | ${sesionCalibracionActiva.lideresText} | ${sesionCalibracionActiva.codigoSiteText}`;
+                }
+                datosIniciales.hallazgo_causa_raiz = `Sesión de Calibración (Ref Eval #${sesionCalibracionActiva.numero_evaluacion}) · Líder: ${sesionCalibracionActiva.lider}`;
+            }
+
+            const { data: nuevaEval, error } = await sb.from('evaluaciones')
+                .insert([datosIniciales])
+                .select()
+                .single();
+
+            if (error || !nuevaEval) {
+                alert('Error al crear evaluación de calibración: ' + (error?.message || ''));
+                return;
+            }
+
+            await cargarEvaluaciones();
+            mostrarTab('tab-nueva-eval', false);
+            abrirEvaluacionExistente(nuevaEval);
+        }
 
         if (window.lucide) lucide.createIcons();
 
@@ -1419,6 +1819,7 @@
 
             const botones = [
                 { id: 'tab-mis-metricas', label: 'Mis Métricas y Evaluaciones', visible: true },
+                { id: 'tab-calibracion', label: 'Calibración', visible: puedeCrearEval || esRolSupervisorOTL() },
                 { id: 'tab-ver-evaluaciones', label: 'Ver Evaluaciones', visible: true },
                 { id: 'tab-nueva-eval', label: '+ Nueva Evaluación', visible: puedeCrearEval },
                 { id: 'tab-admin', label: 'Administración (Skills y Usuarios)', visible: puedeAdmin },
@@ -1449,7 +1850,7 @@
 
         function mostrarTab(tabId, forzarReinicioCero = false) {
             tabActualId = tabId;
-            ['tab-mis-metricas', 'tab-ver-evaluaciones', 'tab-nueva-eval', 'tab-admin', 'tab-tiempos'].forEach(id => {
+            ['tab-mis-metricas', 'tab-calibracion', 'tab-ver-evaluaciones', 'tab-nueva-eval', 'tab-admin', 'tab-tiempos'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             document.getElementById(tabId).classList.remove('hidden');
@@ -1465,6 +1866,7 @@
             }
 
             if (tabId === 'tab-nueva-eval') volverAlHubCategorias(false);
+            if (tabId === 'tab-calibracion') inicializarVistaCalibracion();
             iniciarOContinuarCronometro(tabId, null, forzarReinicioCero);
         }
 
@@ -1967,7 +2369,7 @@
                 badgeEstado.className = 'bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full';
             }
 
-            const mostrarCalib = (evalObj.canal === 'Auditorias' || esRolAdminOManager());
+            const mostrarCalib = (evalObj.es_calibracion || evalObj.canal === 'Auditorias' || esRolAdminOManager());
             document.getElementById('box-calibracion').classList.toggle('hidden', !mostrarCalib);
             document.getElementById('eval-es-calibracion').checked = Boolean(evalObj.es_calibracion);
 
@@ -2820,19 +3222,7 @@
             mostrarVista('landing-view');
         }
     </script>
-    <!-- Cargar librería de Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  // Reemplaza con tus datos reales de Supabase
-  const SUPABASE_URL = 'https://izrbsjpfwahvwmqfppbv.supabase.co';
-  const SUPABASE_ANON_KEY = 'Psb_publishable_w0letHoOUzJhQIaxAHHXlA_l04hRMpz';
-
-  // Inicializar conexión
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  console.log('Conectado a Supabase:', supabase);
-</script>
 </body>
 </html>
 
