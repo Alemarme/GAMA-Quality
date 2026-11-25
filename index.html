@@ -2820,6 +2820,19 @@
             mostrarVista('landing-view');
         }
     </script>
+    <!-- Cargar librería de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Reemplaza con tus datos reales de Supabase
+  const SUPABASE_URL = 'https://izrbsjpfwahvwmqfppbv.supabase.co';
+  const SUPABASE_ANON_KEY = 'Psb_publishable_w0letHoOUzJhQIaxAHHXlA_l04hRMpz';
+
+  // Inicializar conexión
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  console.log('Conectado a Supabase:', supabase);
+</script>
 </body>
 </html>
 
