@@ -352,30 +352,53 @@
                         </div>
                         <div>
                             <h2 class="text-lg font-bold text-slate-900">Módulo de Calibración</h2>
-                            <p class="text-xs text-slate-500">Sincronización de criterios y auditoría conjunta de evaluaciones</p>
+                            <p class="text-xs text-slate-500">Sincronización de criterios, convocatorias y auditoría conjunta de evaluaciones</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <button type="button" id="btn-subtab-calib-crear" onclick="cambiarSubtabCalibracion('crear')"
+                        <button type="button" id="btn-subtab-calib-ver" onclick="cambiarSubtabCalibracion('ver')"
                             class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5">
+                            <i data-lucide="eye" class="w-4 h-4"></i> Ver Calibración
+                        </button>
+                        <button type="button" id="btn-subtab-calib-crear" onclick="cambiarSubtabCalibracion('crear')"
+                            class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Crear Sesión de Calibración
                         </button>
                         <button type="button" id="btn-subtab-calib-queues" onclick="cambiarSubtabCalibracion('queues')"
                             class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5">
                             <i data-lucide="layers" class="w-4 h-4"></i> Queues de Calibración
                         </button>
+                        <button type="button" id="btn-subtab-calib-invitacion" onclick="cambiarSubtabCalibracion('invitacion')"
+                            class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5">
+                            <i data-lucide="mail-plus" class="w-4 h-4"></i> Enviar Invitación
+                        </button>
                     </div>
                 </div>
 
-                <div id="subtab-calib-crear" class="bg-white p-6 rounded-2xl border border-purple-200 shadow-sm space-y-6">
+                <div id="subtab-calib-ver" class="bg-white p-6 rounded-2xl border border-purple-200 shadow-sm space-y-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-purple-950">Mis Evaluaciones de Calibración</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Visualiza únicamente las calibraciones creadas por tu usuario. Haz clic en el número para ver el detalle completo.</p>
+                        </div>
+                        <button type="button" onclick="cargarEvaluaciones().then(() => renderizarListaMisCalibraciones())"
+                            class="text-xs bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5 self-start sm:self-auto">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Actualizar Lista
+                        </button>
+                    </div>
+
+                    <div id="lista-mis-calibraciones" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                </div>
+
+                <div id="subtab-calib-crear" class="hidden bg-white p-6 rounded-2xl border border-purple-200 shadow-sm space-y-6">
                     <div class="border-b border-slate-200 pb-4">
                         <h3 class="text-base font-bold text-purple-950">Configurar Sesión de Calibración</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Selecciona al líder participante e ingresa el número de evaluación existente para precargar sus datos en las Queues.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Selecciona al líder participante (Supervisor, TL, Manager o Analista QA) e ingresa el número de evaluación existente para precargar sus datos en las Queues.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">1. Seleccionar Líder (Supervisor / TL / Manager) *</label>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">1. Seleccionar Líder (Supervisor / TL / Manager / QA) *</label>
                             <select id="calib-select-lider" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm font-medium focus:ring-2 focus:ring-purple-600 outline-none">
                                 <option value="">Selecciona un líder...</option>
                             </select>
@@ -462,6 +485,149 @@
                     </div>
 
                     <div id="grid-queues-calibracion" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+                </div>
+
+                <div id="subtab-calib-invitacion" class="hidden bg-white p-6 rounded-2xl border border-purple-200 shadow-sm space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-purple-950">Convocatorias e Invitaciones de Calibración</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Gestiona las notificaciones por correo tanto para el líder responsable como para los participantes de la sesión.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 bg-slate-100 p-1 rounded-xl">
+                            <button type="button" id="btn-inv-sub-lider" onclick="cambiarSubtabInvitacion('lider')"
+                                class="px-3.5 py-2 rounded-lg text-xs font-bold bg-purple-700 text-white shadow-xs transition flex items-center gap-1.5">
+                                <i data-lucide="user-check" class="w-3.5 h-3.5"></i> 1. Invitación Líder de Calibración
+                            </button>
+                            <button type="button" id="btn-inv-sub-equipo" onclick="cambiarSubtabInvitacion('equipo')"
+                                class="px-3.5 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-white transition flex items-center gap-1.5">
+                                <i data-lucide="users" class="w-3.5 h-3.5"></i> 2. Invitación General al Equipo
+                            </button>
+                        </div>
+                    </div>
+
+                    <form id="form-invitacion-lider" class="space-y-5">
+                        <div class="bg-indigo-50/70 border border-indigo-200 rounded-xl p-4 flex items-start gap-3">
+                            <i data-lucide="info" class="w-5 h-5 text-indigo-700 shrink-0 mt-0.5"></i>
+                            <div class="text-xs text-indigo-950 space-y-1">
+                                <p class="font-bold">Regla de Plazo para el Líder (7 Días Hábiles Previos):</p>
+                                <p>Al definir la fecha y hora de la sesión de calibración, el sistema calculará automáticamente <strong>7 días hábiles antes</strong> como fecha y hora límite para que el líder envíe por correo el número de evaluación a subir.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Líder de la Calibración *</label>
+                                <select id="inv-lider-usuario" required onchange="actualizarCorreoLiderSeleccionado()"
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm font-medium focus:ring-2 focus:ring-purple-600 outline-none">
+                                    <option value="">Selecciona al líder...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico del Líder *</label>
+                                <input type="email" id="inv-lider-correo" required placeholder="lider@empresa.com"
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-slate-50 text-sm focus:ring-2 focus:ring-purple-600 outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Queue / Tipo de Calibración *</label>
+                                <select id="inv-lider-tipo" required
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm font-medium focus:ring-2 focus:ring-purple-600 outline-none">
+                                    <option value="Voice">Voice</option>
+                                    <option value="Voice TL">Voice TL</option>
+                                    <option value="Chat">Chat</option>
+                                    <option value="Chat TL">Chat TL</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Email TL">Email TL</option>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="WhatsApp TL">WhatsApp TL</option>
+                                    <option value="Back Office">Back Office</option>
+                                    <option value="Back Office TL">Back Office TL</option>
+                                    <option value="CSAT">CSAT</option>
+                                    <option value="Auditorías">Auditorías</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Fecha y Hora de la Calibración *</label>
+                                <input type="datetime-local" id="inv-lider-fecha-calib" required onchange="calcularPlazoLider7DiasHabiles()"
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm focus:ring-2 focus:ring-purple-600 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-purple-900 mb-1">Fecha y Hora Límite Envío # Eval (7 Días Hábiles Antes)</label>
+                                <input type="text" id="inv-lider-fecha-limite-display" readonly placeholder="Selecciona fecha de calibración..."
+                                    class="w-full px-3 py-2.5 rounded-lg border border-purple-300 bg-purple-50 text-purple-950 font-bold text-xs">
+                                <input type="hidden" id="inv-lider-fecha-limite-iso">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Notas Adicionales / Enlace de Reunión (Opcional)</label>
+                            <textarea id="inv-lider-notas" rows="2" oninput="autoExpandirTextarea(this)"
+                                placeholder="Ej. Campaña Retención · Enlace de Teams/Meet o instrucciones específicas..."
+                                class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-end pt-3 border-t border-slate-200">
+                            <button type="submit" id="btn-enviar-inv-lider"
+                                class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow-md transition flex items-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i> Enviar Invitación al Líder por Correo
+                            </button>
+                        </div>
+                    </form>
+
+                    <form id="form-invitacion-equipo" class="hidden space-y-5">
+                        <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+                            <i data-lucide="clock-alert" class="w-5 h-5 text-amber-700 shrink-0 mt-0.5"></i>
+                            <div class="text-xs text-amber-950 space-y-1">
+                                <p class="font-bold">Regla de Ventana de Ejecución para el Equipo (3 Horas Previas):</p>
+                                <p>El correo notificará a todos los miembros seleccionados que <strong>desde este mismo momento ya pueden crear y subir su evaluación de calibración</strong>, teniendo como hora límite estricta <strong>3 horas antes</strong> de la sesión programada.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Número de Evaluación a Calibrar (#) *</label>
+                                <input type="number" id="inv-equipo-num-eval" required min="1" placeholder="Ej. 24"
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 text-sm font-mono font-bold focus:ring-2 focus:ring-purple-600 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Fecha y Hora de la Calibración *</label>
+                                <input type="datetime-local" id="inv-equipo-fecha-calib" required onchange="calcularPlazoEquipo3HorasAntes()"
+                                    class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm focus:ring-2 focus:ring-purple-600 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-amber-900 mb-1">Hora Límite para Completar Eval (3 Horas Antes)</label>
+                                <input type="text" id="inv-equipo-limite-display" readonly placeholder="Selecciona fecha de calibración..."
+                                    class="w-full px-3 py-2.5 rounded-lg border border-amber-300 bg-amber-50 text-amber-950 font-bold text-xs">
+                                <input type="hidden" id="inv-equipo-limite-iso">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-bold text-slate-700">Seleccionar Miembros del Equipo que Deben Asistir *</label>
+                                <label class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-700 cursor-pointer">
+                                    <input type="checkbox" id="chk-inv-seleccionar-todos" onchange="toggleSeleccionarTodosEquipo(this.checked)" class="rounded text-purple-600">
+                                    Seleccionar todos
+                                </label>
+                            </div>
+                            <div id="lista-checkboxes-equipo-calib" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-56 overflow-y-auto p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs"></div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Correos Adicionales (Separados por coma, opcional)</label>
+                            <input type="text" id="inv-equipo-correos-extra" placeholder="invitado1@empresa.com, invitado2@empresa.com"
+                                class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none">
+                        </div>
+
+                        <div class="flex justify-end pt-3 border-t border-slate-200">
+                            <button type="submit" id="btn-enviar-inv-equipo"
+                                class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow-md transition flex items-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i> Enviar Invitación General al Equipo
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </section>
 
@@ -1305,26 +1471,97 @@
 
         function inicializarVistaCalibracion() {
             poblarSelectorLideresCalibracion();
+            poblarSelectoresInvitacionCalibracion();
+            renderizarListaMisCalibraciones();
             renderizarQueuesCalibracion();
+            cambiarSubtabCalibracion('ver');
             if (window.lucide) lucide.createIcons();
         }
 
         function cambiarSubtabCalibracion(subtab) {
-            const esCrear = subtab === 'crear';
-            document.getElementById('subtab-calib-crear').classList.toggle('hidden', !esCrear);
-            document.getElementById('subtab-calib-queues').classList.toggle('hidden', esCrear);
+            const subtabs = ['ver', 'crear', 'queues', 'invitacion'];
+            subtabs.forEach(s => {
+                const panel = document.getElementById(`subtab-calib-${s}`);
+                const btn = document.getElementById(`btn-subtab-calib-${s}`);
+                const activo = (s === subtab);
+                if (panel) panel.classList.toggle('hidden', !activo);
+                if (btn) {
+                    btn.className = activo
+                        ? 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5'
+                        : 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5';
+                }
+            });
 
-            const btnCrear = document.getElementById('btn-subtab-calib-crear');
-            const btnQueues = document.getElementById('btn-subtab-calib-queues');
+            if (subtab === 'ver') renderizarListaMisCalibraciones();
+            if (subtab === 'queues') renderizarQueuesCalibracion();
+            if (subtab === 'invitacion') poblarSelectoresInvitacionCalibracion();
+            if (window.lucide) lucide.createIcons();
+        }
 
-            if (esCrear) {
-                btnCrear.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5';
-                btnQueues.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5';
-            } else {
-                btnQueues.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5';
-                btnCrear.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 transition flex items-center gap-1.5';
-                renderizarQueuesCalibracion();
+        function obtenerEtiquetaTipoCalibracion(ev) {
+            const canal = (ev.canal || '').trim();
+            const sub = (ev.subtipo_evaluacion || '').toLowerCase();
+            const esTL = sub.includes('tl');
+
+            if (canal.toLowerCase().includes('back office')) {
+                return esTL ? 'Back Office TL' : 'Back Office';
             }
+            if (canal.toLowerCase() === 'chat') {
+                return esTL ? 'Chat TL' : 'Chat';
+            }
+            if (canal.toLowerCase() === 'voice') {
+                return esTL ? 'Voice TL' : 'Voice';
+            }
+            if (canal.toLowerCase() === 'email') {
+                return esTL ? 'Email TL' : 'Email';
+            }
+            if (canal.toLowerCase() === 'whatsapp') {
+                return esTL ? 'WhatsApp TL' : 'WhatsApp';
+            }
+            return esTL ? `${canal} TL` : (canal || 'Calibración');
+        }
+
+        function renderizarListaMisCalibraciones() {
+            const contenedor = document.getElementById('lista-mis-calibraciones');
+            if (!contenedor || !perfilActual) return;
+
+            const misCalibraciones = evaluacionesCache.filter(ev =>
+                Boolean(ev.es_calibracion) && ev.qa_id === perfilActual.id
+            );
+
+            if (misCalibraciones.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full bg-slate-50 border border-dashed border-slate-300 rounded-xl p-8 text-center">
+                        <p class="text-sm font-semibold text-slate-600">Aún no has creado evaluaciones de calibración.</p>
+                        <p class="text-xs text-slate-400 mt-1">Ve a "Crear Sesión de Calibración" o "Queues de Calibración" para iniciar una.</p>
+                    </div>`;
+                return;
+            }
+
+            contenedor.innerHTML = misCalibraciones.map(ev => {
+                const tipoEtiqueta = obtenerEtiquetaTipoCalibracion(ev);
+                const esTL = tipoEtiqueta.includes('TL');
+                const evJson = JSON.stringify(ev).replace(/'/g, "&#39;");
+
+                return `
+                    <div class="flex items-center justify-between bg-purple-50/50 hover:bg-purple-50 border border-purple-200 px-4 py-3 rounded-xl shadow-2xs transition">
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <button type="button" onclick='abrirPopUpSoloLectura(${evJson})'
+                                class="font-mono font-extrabold text-base text-purple-800 hover:text-purple-950 hover:underline flex items-center gap-1"
+                                title="Ver detalle interno de la evaluación">
+                                #${ev.numero_evaluacion}
+                            </button>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full ${esTL ? 'bg-fuchsia-100 text-fuchsia-800 border border-fuchsia-200' : 'bg-indigo-100 text-indigo-800 border border-indigo-200'}">
+                                ${tipoEtiqueta}
+                            </span>
+                        </div>
+                        <button type="button" onclick='abrirPopUpSoloLectura(${evJson})'
+                            class="text-xs font-semibold text-purple-700 hover:text-purple-900 flex items-center gap-1">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver
+                        </button>
+                    </div>`;
+            }).join('');
+
             if (window.lucide) lucide.createIcons();
         }
 
@@ -1334,12 +1571,15 @@
             const valorPrevio = sel.value;
             sel.innerHTML = '<option value="">Selecciona un líder...</option>';
 
-            const lideresDB = usuariosCache.filter(u =>
-                ['Supervisor', 'Supervisor QA', 'Team Lead', 'Team_Lead', 'Manager'].includes(u.rol)
+            const lideresYQaDB = usuariosCache.filter(u =>
+                u.activo && (
+                    ['Supervisor', 'Supervisor QA', 'Team Lead', 'Team_Lead', 'Manager'].includes(u.rol) ||
+                    u.rol.startsWith('QA')
+                )
             );
 
-            if (lideresDB.length > 0) {
-                lideresDB.forEach(l => {
+            if (lideresYQaDB.length > 0) {
+                lideresYQaDB.forEach(l => {
                     sel.innerHTML += `<option value="${l.nombre_completo} (${l.rol})">${l.nombre_completo} · ${l.rol}</option>`;
                 });
             } else {
@@ -1350,6 +1590,212 @@
             }
             if (valorPrevio) sel.value = valorPrevio;
         }
+
+        function cambiarSubtabInvitacion(tipo) {
+            const esLider = tipo === 'lider';
+            document.getElementById('form-invitacion-lider').classList.toggle('hidden', !esLider);
+            document.getElementById('form-invitacion-equipo').classList.toggle('hidden', esLider);
+
+            const btnLider = document.getElementById('btn-inv-sub-lider');
+            const btnEquipo = document.getElementById('btn-inv-sub-equipo');
+
+            if (esLider) {
+                btnLider.className = 'px-3.5 py-2 rounded-lg text-xs font-bold bg-purple-700 text-white shadow-xs transition flex items-center gap-1.5';
+                btnEquipo.className = 'px-3.5 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-white transition flex items-center gap-1.5';
+            } else {
+                btnEquipo.className = 'px-3.5 py-2 rounded-lg text-xs font-bold bg-purple-700 text-white shadow-xs transition flex items-center gap-1.5';
+                btnLider.className = 'px-3.5 py-2 rounded-lg text-xs font-bold text-slate-700 hover:bg-white transition flex items-center gap-1.5';
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function poblarSelectoresInvitacionCalibracion() {
+            const selLider = document.getElementById('inv-lider-usuario');
+            const contEquipo = document.getElementById('lista-checkboxes-equipo-calib');
+            if (!selLider || !contEquipo) return;
+
+            const candidatosLider = usuariosCache.filter(u =>
+                u.activo && (
+                    ['Supervisor', 'Supervisor QA', 'Team Lead', 'Team_Lead', 'Manager'].includes(u.rol) ||
+                    u.rol.startsWith('QA')
+                )
+            );
+
+            selLider.innerHTML = '<option value="">Selecciona al líder...</option>';
+            candidatosLider.forEach(u => {
+                selLider.innerHTML += `<option value="${u.id}" data-correo="${u.correo || ''}" data-nombre="${u.nombre_completo}" data-rol="${u.rol}">${u.nombre_completo} (${u.rol})</option>`;
+            });
+
+            const miembrosEquipo = usuariosCache.filter(u => u.activo && u.rol !== 'Agente');
+            contEquipo.innerHTML = miembrosEquipo.map(u => `
+                <label class="flex items-start gap-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-purple-300">
+                    <input type="checkbox" value="${u.correo}" data-nombre="${u.nombre_completo}" class="chk-miembro-equipo-calib mt-0.5 rounded text-purple-600">
+                    <div class="leading-tight">
+                        <span class="font-bold text-slate-800 block">${u.nombre_completo}</span>
+                        <span class="text-[11px] text-slate-500">${u.rol} · ${u.correo}</span>
+                    </div>
+                </label>
+            `).join('');
+        }
+
+        function actualizarCorreoLiderSeleccionado() {
+            const sel = document.getElementById('inv-lider-usuario');
+            const opt = sel.options[sel.selectedIndex];
+            if (opt && opt.dataset.correo) {
+                document.getElementById('inv-lider-correo').value = opt.dataset.correo;
+            }
+        }
+
+        function restarDiasHabiles(fechaBase, diasHabiles) {
+            const resultado = new Date(fechaBase.getTime());
+            let restantes = diasHabiles;
+            while (restantes > 0) {
+                resultado.setDate(resultado.getDate() - 1);
+                const diaSemana = resultado.getDay();
+                if (diaSemana !== 0 && diaSemana !== 6) {
+                    restantes--;
+                }
+            }
+            return resultado;
+        }
+
+        function calcularPlazoLider7DiasHabiles() {
+            const val = document.getElementById('inv-lider-fecha-calib').value;
+            if (!val) return;
+            const fechaCalib = new Date(val);
+            const fechaLimite = restarDiasHabiles(fechaCalib, 7);
+
+            document.getElementById('inv-lider-fecha-limite-iso').value = fechaLimite.toISOString();
+            document.getElementById('inv-lider-fecha-limite-display').value = fechaLimite.toLocaleString('es-HN', {
+                weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function calcularPlazoEquipo3HorasAntes() {
+            const val = document.getElementById('inv-equipo-fecha-calib').value;
+            if (!val) return;
+            const fechaCalib = new Date(val);
+            const fechaLimite = new Date(fechaCalib.getTime() - (3 * 60 * 60 * 1000));
+
+            document.getElementById('inv-equipo-limite-iso').value = fechaLimite.toISOString();
+            document.getElementById('inv-equipo-limite-display').value = fechaLimite.toLocaleString('es-HN', {
+                weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function toggleSeleccionarTodosEquipo(marcado) {
+            document.querySelectorAll('.chk-miembro-equipo-calib').forEach(chk => {
+                chk.checked = marcado;
+            });
+        }
+
+        document.getElementById('form-invitacion-lider')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const sel = document.getElementById('inv-lider-usuario');
+            const opt = sel.options[sel.selectedIndex];
+            const correoLider = document.getElementById('inv-lider-correo').value.trim();
+            const tipoCalib = document.getElementById('inv-lider-tipo').value;
+            const fechaCalibVal = document.getElementById('inv-lider-fecha-calib').value;
+            const fechaLimiteTexto = document.getElementById('inv-lider-fecha-limite-display').value;
+            const notas = document.getElementById('inv-lider-notas').value.trim();
+
+            if (!opt || !correoLider || !fechaCalibVal) {
+                alert('Completa todos los campos obligatorios.');
+                return;
+            }
+
+            const btn = document.getElementById('btn-enviar-inv-lider');
+            btn.disabled = true;
+            btn.textContent = 'Enviando invitación...';
+
+            const fechaCalibTexto = new Date(fechaCalibVal).toLocaleString();
+            const payload = {
+                tipo_envio: 'invitacion_calibracion_lider',
+                correo_destino: correoLider,
+                nombre_lider: opt.dataset.nombre || opt.text,
+                rol_lider: opt.dataset.rol || '',
+                tipo_calibracion: tipoCalib,
+                fecha_hora_calibracion: fechaCalibTexto,
+                fecha_hora_limite_envio_eval: fechaLimiteTexto,
+                regla_plazo: '7 días hábiles antes de la sesión de calibración',
+                mensaje_cuerpo: `Hola ${opt.dataset.nombre}, has sido asignado como Líder de Calibración (${tipoCalib}) programada para el ${fechaCalibTexto}. Por favor envía por correo el número de evaluación a subir para calibrar a más tardar el ${fechaLimiteTexto} (7 días hábiles antes de la sesión).`,
+                notas_adicionales: notas,
+                enviado_por: `${perfilActual.nombre_completo} (${perfilActual.correo})`
+            };
+
+            if (AUDIT_DELETE_WEBHOOK_URL && AUDIT_DELETE_WEBHOOK_URL.startsWith('http')) {
+                await fetch(AUDIT_DELETE_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(() => {});
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i> Enviar Invitación al Líder por Correo';
+            if (window.lucide) lucide.createIcons();
+
+            alert(`Invitación enviada a ${correoLider}.\nFecha Calibración: ${fechaCalibTexto}\nLímite envío # de evaluación (7 días hábiles antes): ${fechaLimiteTexto}`);
+            document.getElementById('form-invitacion-lider').reset();
+            document.getElementById('inv-lider-fecha-limite-display').value = '';
+        });
+
+        document.getElementById('form-invitacion-equipo')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const numEval = document.getElementById('inv-equipo-num-eval').value;
+            const fechaCalibVal = document.getElementById('inv-equipo-fecha-calib').value;
+            const limiteTexto = document.getElementById('inv-equipo-limite-display').value;
+            const correosExtraRaw = document.getElementById('inv-equipo-correos-extra').value.trim();
+
+            const seleccionados = Array.from(document.querySelectorAll('.chk-miembro-equipo-calib:checked'))
+                .map(c => ({ correo: c.value, nombre: c.dataset.nombre }));
+
+            const extras = correosExtraRaw
+                ? correosExtraRaw.split(',').map(c => c.trim()).filter(c => c.includes('@')).map(c => ({ correo: c, nombre: c }))
+                : [];
+
+            const destinatarios = [...seleccionados, ...extras];
+            if (destinatarios.length === 0) {
+                alert('Selecciona al menos un miembro del equipo o ingresa un correo válido.');
+                return;
+            }
+
+            const btn = document.getElementById('btn-enviar-inv-equipo');
+            btn.disabled = true;
+            btn.textContent = 'Enviando convocatoria...';
+
+            const fechaCalibTexto = new Date(fechaCalibVal).toLocaleString();
+            const payload = {
+                tipo_envio: 'invitacion_calibracion_equipo',
+                destinatarios: destinatarios,
+                correos_lista: destinatarios.map(d => d.correo).join(', '),
+                numero_evaluacion: numEval,
+                fecha_hora_calibracion: fechaCalibTexto,
+                fecha_hora_limite_completar: limiteTexto,
+                regla_plazo: 'Desde este momento pueden crear su evaluación teniendo como límite 3 horas antes de la calibración',
+                mensaje_cuerpo: `Convocatoria a Sesión de Calibración (Evaluación #${numEval}) el ${fechaCalibTexto}. Desde este momento ya puedes crear y subir tu evaluación en la plataforma, teniendo como límite máximo el ${limiteTexto} (3 horas previas a la calibración).`,
+                enviado_por: `${perfilActual.nombre_completo} (${perfilActual.correo})`
+            };
+
+            if (AUDIT_DELETE_WEBHOOK_URL && AUDIT_DELETE_WEBHOOK_URL.startsWith('http')) {
+                await fetch(AUDIT_DELETE_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(() => {});
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i> Enviar Invitación General al Equipo';
+            if (window.lucide) lucide.createIcons();
+
+            alert(`Invitación general enviada a ${destinatarios.length} miembro(s) del equipo.\nLímite para completar evaluación (3 horas antes): ${limiteTexto}`);
+            document.getElementById('form-invitacion-equipo').reset();
+            document.getElementById('inv-equipo-limite-display').value = '';
+            toggleSeleccionarTodosEquipo(false);
+        });
 
         async function cargarEvaluacionParaCalibracion() {
             const lider = document.getElementById('calib-select-lider').value;
@@ -2925,6 +3371,7 @@
             if (error) return;
             evaluacionesCache = evals || [];
             actualizarPanelConteoNuevaEvaluacion();
+            renderizarListaMisCalibraciones();
             renderizarTablaGlobal();
         }
 
@@ -3225,4 +3672,3 @@
 
 </body>
 </html>
-
