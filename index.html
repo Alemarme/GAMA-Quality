@@ -1,0 +1,2825 @@
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMA Quality Consulting · Global Audit & Monitoring Assurance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <div id="landing-view" class="min-h-screen flex flex-col bg-white">
+        <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shadow-md">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-xl text-slate-900 tracking-tight block leading-none">GAMA Quality Consulting</span>
+                        <span class="text-[11px] font-semibold text-blue-600 uppercase tracking-wider">Global Audit & Monitoring Assurance</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                    <a href="#servicios" class="hover:text-blue-700 transition">Servicios</a>
+                    <a href="#metodologia" class="hover:text-blue-700 transition">Metodología ISO & Six Sigma</a>
+                    <a href="#plataforma" class="hover:text-blue-700 transition">Plataforma Digital</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="mostrarVista('login-view')" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition shadow-sm flex items-center gap-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i> Iniciar Sesión
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white py-20 lg:py-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold uppercase tracking-wide mb-6">
+                        <i data-lucide="award" class="w-4 h-4"></i> Estándares ISO 18295-1 · ISO 9001 · Lean Six Sigma
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                        Transformamos la calidad de tu <span class="text-blue-400">Contact Center</span> en resultados medibles.
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-300 leading-relaxed mb-8">
+                        En <strong>GAMA Quality Consulting</strong> brindamos auditoría omnicanal independiente, calibración estadística y monitoreo en tiempo real para operaciones BPO y equipos de atención al cliente de alto rendimiento.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button type="button" onclick="mostrarVista('login-view')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-7 py-3.5 rounded-xl text-base transition shadow-lg flex items-center gap-2">
+                            Acceder al Portal Operativo <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                        <a href="#servicios" class="bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl text-base transition">
+                            Conocer Soluciones
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 border-t border-slate-800 py-10 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="text-3xl font-extrabold text-blue-400">100%</p>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Trazabilidad Omnicanal</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-emerald-400">Base 100</p>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Rúbricas + Control Auto-Fail</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-blue-400">Six Sigma</p>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Control DPMO y Muestreo Cochran</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-emerald-400">24/7</p>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider mt-1">Visibilidad para Líderes y Clientes</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900">Nuestros Pilares de Aseguramiento de Calidad</h2>
+                    <p class="text-slate-600 mt-3">Diseñados para reducir el costo de pobre calidad (COPQ), elevar la resolución en primer contacto (FCR) y blindar el cumplimiento normativo.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-5">
+                            <i data-lucide="headphones" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Auditoría Omnicanal</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Evaluación especializada en Queues de Voz, Chat, WhatsApp, Email, Back Office y encuestas CSAT bajo rúbricas ponderadas y control de fallas críticas (KYC/GDPR).
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-5">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Analítica Lean Six Sigma</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Cálculo estadístico de muestras representativas, análisis de causa raíz (Pareto e Ishikawa), control de defectos por millón de oportunidades (DPMO) y calibraciones Gage R&R.
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-5">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Gobernanza y Feedback</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Entrega transparente y privada de retroalimentación al agente con acuse de recibo digital, seguimiento para Team Leads/Managers y tableros ejecutivos para clientes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodologia" class="py-20 bg-white border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-xs font-bold text-blue-700 uppercase tracking-wider">Tecnología + Metodología</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-5">Un ecosistema conectado para cada rol de tu operación</h2>
+                    <ul class="space-y-4 text-slate-600 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                            <span><strong>Analistas QA:</strong> Formularios dinámicos por Queue con cálculo automático Base 100, detección de Auto-Fail y trazabilidad completa.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                            <span><strong>Agentes:</strong> Acceso privado e inmediato a sus evaluaciones, criterios detallados y confirmación de lectura.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                            <span><strong>Supervisores, Managers y Clientes:</strong> Monitoreo consolidado por campaña, cumplimiento de revisión y métricas de desempeño.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="plataforma" class="bg-slate-900 text-white p-8 sm:p-10 rounded-3xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-3">¿Ya formas parte de la operación?</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        Ingresa con tus credenciales asignadas en GAMA Quality Consulting para registrar evaluaciones, revisar tu retroalimentación o consultar los indicadores de tu equipo.
+                    </p>
+                    <button type="button" onclick="mostrarVista('login-view')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                        <i data-lucide="lock" class="w-4 h-4"></i> Ir al Inicio de Sesión
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-slate-950 text-slate-400 py-8 mt-auto border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+                <p>© 2026 GAMA Quality Consulting · Global Audit & Monitoring Assurance. Todos los derechos reservados.</p>
+                <p>Plataforma de Gestión de Calidad · Seguridad RLS & Estándar ISO 18295-1</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="login-view" class="hidden min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+            <button type="button" onclick="mostrarVista('landing-view')" class="text-xs font-semibold text-slate-500 hover:text-blue-700 flex items-center gap-1 mb-6">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al inicio
+            </button>
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-blue-600 text-white mb-4 shadow-lg">
+                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-slate-900">GAMA Quality Consulting</h1>
+                <p class="text-xs font-semibold text-blue-600 uppercase tracking-wider mt-0.5">Global Audit & Monitoring Assurance</p>
+                <p class="text-sm text-slate-500 mt-2">Inicia sesión con tus credenciales corporativas</p>
+            </div>
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Correo electrónico</label>
+                    <input type="email" id="login-email" required placeholder="usuario@empresa.com"
+                        class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Contraseña</label>
+                    <input type="password" id="login-password" required placeholder="••••••••"
+                        class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none">
+                </div>
+                <p id="login-error" class="text-sm text-red-600 hidden"></p>
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition shadow-md">
+                    Ingresar a la Plataforma
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="force-password-view" class="hidden min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-amber-500 text-white mb-4 shadow-lg">
+                    <i data-lucide="key-round" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Actualización Obligatoria de Contraseña</h2>
+                <p class="text-xs text-slate-500 mt-1">Establece una contraseña personal de <strong>nivel Excelente</strong> en tu primer acceso.</p>
+            </div>
+
+            <form id="force-password-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nueva Contraseña *</label>
+                    <input type="password" id="new-strong-password" required oninput="evaluarFuerzaPassword()" placeholder="Ingresa tu nueva contraseña"
+                        class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <span class="text-slate-600">Nivel de Seguridad:</span>
+                        <span id="pwd-strength-label" class="text-red-600">Muy Débil</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="pwd-strength-bar" class="h-full bg-red-500 transition-all duration-300" style="width: 10%"></div>
+                    </div>
+                    <ul class="text-[11px] space-y-1 text-slate-600 pt-1">
+                        <li id="req-len" class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Mínimo 10 caracteres</li>
+                        <li id="req-upper" class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Al menos 1 letra MAYÚSCULA (A-Z)</li>
+                        <li id="req-lower" class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Al menos 1 letra minúscula (a-z)</li>
+                        <li id="req-num" class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Al menos 1 número (0-9)</li>
+                        <li id="req-sym" class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Al menos 1 carácter especial (!@#$%^&*)</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Confirmar Nueva Contraseña *</label>
+                    <input type="password" id="confirm-strong-password" required placeholder="Repite tu nueva contraseña"
+                        class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+
+                <p id="force-pwd-error" class="text-xs text-red-600 font-semibold hidden"></p>
+
+                <button type="submit" id="btn-save-strong-pwd" disabled
+                    class="w-full bg-blue-600 disabled:bg-slate-300 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition shadow-md">
+                    Guardar Contraseña y Continuar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-view" class="hidden min-h-screen flex flex-col">
+        <header class="bg-slate-900 text-white shadow-md sticky top-0 z-30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="award" class="w-7 h-7 text-blue-400 shrink-0"></i>
+                    <div>
+                        <span class="font-bold text-lg tracking-tight">GAMA Quality Hub</span>
+                        <span id="user-role-badge" class="ml-2 text-xs bg-blue-600 px-2.5 py-0.5 rounded-full font-semibold uppercase"></span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2.5 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-xl shadow-inner">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <div class="text-left">
+                        <div class="flex items-center gap-1.5">
+                            <p id="timer-pantalla-nombre" class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold leading-none">Mis Métricas y Evaluaciones</p>
+                            <span id="badge-ventana-secundaria" class="hidden text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.2 rounded font-bold uppercase">Pestaña Duplicada</span>
+                        </div>
+                        <p id="timer-reloj-display" class="font-mono text-sm font-bold text-emerald-400 leading-tight">00:00:00</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="text-right hidden md:block">
+                        <p id="user-name-display" class="text-sm font-medium"></p>
+                        <p id="user-site-display" class="text-xs text-slate-400"></p>
+                    </div>
+                    <button type="button" onclick="cerrarSesion()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-red-600 px-3 py-1.5 rounded-lg text-sm transition">
+                        <i data-lucide="log-out" class="w-4 h-4"></i> <span class="hidden sm:inline">Salir</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <nav id="nav-tabs" class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-3"></nav>
+
+            <section id="tab-mis-metricas" class="space-y-6">
+                <div class="bg-blue-950 text-white p-6 rounded-2xl shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 id="titulo-dashboard-dinamico" class="text-xl font-bold">Dashboard de Rendimiento</h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                        <div id="box-selector-tipo-dashboard" class="hidden">
+                            <select id="select-tipo-dashboard" onchange="cambiarModoDashboard()" class="bg-slate-900 border border-blue-400/40 text-white text-xs font-semibold rounded-lg px-3 py-2 outline-none">
+                                <option value="agentes">Dashboard Agentes (Operaciones)</option>
+                                <option value="qa">Dashboard QA (Analistas)</option>
+                            </select>
+                        </div>
+                        <div id="box-selector-individuo-dashboard" class="hidden flex-1 md:flex-initial">
+                            <select id="select-individuo-dashboard" onchange="renderizarDashboardDinamico()" class="w-full md:w-64 bg-white text-slate-900 text-xs font-bold rounded-lg px-3 py-2 outline-none shadow-sm">
+                                <option value="ALL">Vista Global / Todo el Equipo</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="cargarEvaluaciones()" class="bg-white/10 hover:bg-white/20 px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+
+                <div id="dashboard-meta-bar" class="bg-white px-5 py-3.5 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4 text-xs">
+                    <div><span class="text-slate-400">Nombre / Alcance:</span> <strong id="meta-dash-nombre" class="text-slate-900"></strong></div>
+                    <div><span class="text-slate-400">Código:</span> <strong id="meta-dash-codigo" class="font-mono text-blue-700"></strong></div>
+                    <div><span class="text-slate-400">Supervisor / Equipo:</span> <strong id="meta-dash-supervisor" class="text-slate-800"></strong></div>
+                    <div><span class="text-slate-400">Campaña / Periodo:</span> <strong id="meta-dash-campana" class="text-slate-800"></strong></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <p id="kpi-label-1" class="text-xs font-semibold text-slate-500 uppercase">KPI 1</p>
+                        <p id="kpi-val-1" class="text-2xl font-bold text-slate-900 mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <p id="kpi-label-2" class="text-xs font-semibold text-slate-500 uppercase">KPI 2</p>
+                        <p id="kpi-val-2" class="text-2xl font-bold text-blue-600 mt-1">0%</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <p id="kpi-label-3" class="text-xs font-semibold text-slate-500 uppercase">KPI 3</p>
+                        <p id="kpi-val-3" class="text-2xl font-bold text-red-600 mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <p id="kpi-label-4" class="text-xs font-semibold text-slate-500 uppercase">KPI 4</p>
+                        <p id="kpi-val-4" class="text-2xl font-bold text-emerald-600 mt-1">0%</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-5 border-b border-slate-200 flex justify-between items-center">
+                        <h3 id="titulo-tabla-dashboard" class="font-bold text-base text-slate-900">Detalle de Registros</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead id="thead-dashboard-dinamico"></thead>
+                            <tbody id="tbody-dashboard-dinamico" class="divide-y divide-slate-200 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-ver-evaluaciones" class="hidden space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h2 class="font-bold text-lg text-slate-900">Ver Evaluaciones</h2>
+                        <div class="flex items-center gap-2">
+                            <select id="filtro-estado-eval" onchange="renderizarTablaGlobal()" class="text-xs border border-slate-300 rounded-lg px-3 py-1.5 bg-white font-medium">
+                                <option value="todas">Todas (Según mi nivel)</option>
+                                <option value="finalizada">Solo Guardado Final</option>
+                                <option value="borrador">Solo Borradores</option>
+                                <option value="iniciada">Solo Iniciadas / Sin Guardar</option>
+                            </select>
+                            <button type="button" onclick="cargarEvaluaciones()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1">
+                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b border-slate-200">
+                                    <th class="py-3 px-4">ID #</th>
+                                    <th class="py-3 px-4">Fecha Creación</th>
+                                    <th class="py-3 px-4">Agente / Site</th>
+                                    <th class="py-3 px-4">Evaluador QA</th>
+                                    <th class="py-3 px-4">Queue / Subtipo</th>
+                                    <th class="py-3 px-4">Nota</th>
+                                    <th class="py-3 px-4">Estado</th>
+                                    <th class="py-3 px-4 text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-global-body" class="divide-y divide-slate-200 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-nueva-eval" class="hidden space-y-6">
+                <div id="hub-categorias-eval" class="space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <div class="bg-white p-5 rounded-2xl border border-emerald-200 shadow-sm flex flex-col">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                                <p class="text-xs font-bold uppercase tracking-wider text-emerald-700">Guardado Final</p>
+                                <span id="hub-count-finalizadas" class="text-2xl font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-xl">0</span>
+                            </div>
+                            <div id="hub-lista-finalizadas" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs"></div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-amber-200 shadow-sm flex flex-col">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                                <p class="text-xs font-bold uppercase tracking-wider text-amber-700">Guardadas (Borrador)</p>
+                                <span id="hub-count-borradores" class="text-2xl font-extrabold text-amber-700 bg-amber-50 px-3 py-1 rounded-xl">0</span>
+                            </div>
+                            <div id="hub-lista-borradores" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs"></div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-rose-200 shadow-sm flex flex-col">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                                <p class="text-xs font-bold uppercase tracking-wider text-rose-700">Iniciadas / Sin Guardar</p>
+                                <span id="hub-count-iniciadas" class="text-2xl font-extrabold text-rose-700 bg-rose-50 px-3 py-1 rounded-xl">0</span>
+                            </div>
+                            <div id="hub-lista-iniciadas" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                        <h2 class="text-lg font-bold text-slate-900">Queues de Evaluación</h2>
+                        <span id="badge-nivel-qa-queues" class="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full font-semibold"></span>
+                    </div>
+
+                    <div id="grid-categorias-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+                </div>
+
+                <div id="contenedor-form-eval" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-5 mb-6">
+                        <div>
+                            <button type="button" onclick="volverAlHubCategorias()" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1 mb-2">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Queues
+                            </button>
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <span id="form-numero-eval-badge" class="bg-slate-900 text-white text-xs font-extrabold px-3 py-1 rounded-full"></span>
+                                <span id="form-badge-categoria" class="bg-blue-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase"></span>
+                                <h2 id="form-titulo-subcategoria" class="text-xl font-bold text-slate-900"></h2>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1.5 flex items-center gap-1.5">
+                                <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600"></i>
+                                Inicio de creación: <strong id="display-fecha-inicio-creacion" class="text-slate-700"></strong>
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="badge-estado-form" class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Iniciada</span>
+                            <div class="text-right bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
+                                <p class="text-[11px] uppercase font-bold text-slate-400">Calificación</p>
+                                <p class="text-2xl font-extrabold text-blue-700"><span id="nota-preview">100.00</span>%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="eval-form" class="space-y-6">
+                        <input type="hidden" id="eval-id-registro">
+                        <input type="hidden" id="eval-numero-registro">
+                        <input type="hidden" id="eval-canal-oculto">
+                        <input type="hidden" id="eval-subtipo-oculto">
+                        <input type="hidden" id="eval-fecha-inicio-iso">
+
+                        <div id="box-calibracion" class="bg-indigo-50/70 border border-indigo-200 p-4 rounded-xl flex items-center justify-between">
+                            <p class="text-sm font-bold text-indigo-950">¿Sesión de Calibración?</p>
+                            <label class="inline-flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="eval-es-calibracion" class="w-5 h-5 rounded text-indigo-600">
+                                <span class="text-sm font-bold text-indigo-900">Marcar como Calibración</span>
+                            </label>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label id="label-select-evaluado" class="block text-sm font-medium text-slate-700 mb-1">Agente a Evaluar (Roster) *</label>
+                                <select id="eval-agente" onchange="actualizarDatosAgenteRoster()" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white font-medium"></select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Código / Skill / Site</label>
+                                <input type="text" id="eval-agente-info" readonly placeholder="Se llena desde Roster" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 text-xs font-semibold">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Supervisor / Manager / Cliente</label>
+                                <input type="text" id="eval-lideres-info" readonly placeholder="Se llena desde Roster" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 text-xs font-semibold">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Campaña / Skill *</label>
+                                <select id="eval-skill" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm"></select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Tipo de Form (Rúbrica) *</label>
+                                <select id="eval-form-select" onchange="renderizarRubrica()" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm"></select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">ID Audio / Interacción *</label>
+                                <input type="text" id="eval-id-audio" placeholder="Ej. INT-98432" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Fecha y Hora de Interacción *</label>
+                                <input type="datetime-local" id="eval-fecha-interaccion" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-bold text-slate-900 text-lg">Criterios de Evaluación</h3>
+                                <span id="badge-autofail" class="hidden bg-red-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm">AUTO-FAIL DETECTADO (0%)</span>
+                            </div>
+                            <div id="rubrica-items-container" class="space-y-4"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Hallazgo / Causa Raíz</label>
+                                <textarea id="eval-causa-raiz" rows="2" oninput="autoExpandirTextarea(this)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm resize-none overflow-hidden"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Resumen Ejecutivo / Plan de Acción *</label>
+                                <textarea id="eval-feedback" rows="2" oninput="autoExpandirTextarea(this)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm resize-none overflow-hidden"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200">
+                            <button type="button" id="btn-guardar-borrador" onclick="procesarGuardadoEvaluacion('borrador')"
+                                class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+                                <i data-lucide="file-edit" class="w-4 h-4"></i> Guardar Evaluación
+                            </button>
+
+                            <button type="button" id="btn-guardado-final" onclick="procesarGuardadoEvaluacion('finalizada')"
+                                class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i> Guardado Final
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="tab-admin" class="hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-lg mb-4">Skills y Campañas</h3>
+                        <form id="skill-form" class="space-y-2 mb-4">
+                            <select id="new-skill-type" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                                <option value="SK-VOICE">SK-VOICE · Voice (Llamadas)</option>
+                                <option value="SK-CHAT">SK-CHAT · Chat en Vivo</option>
+                                <option value="SK-EMAIL">SK-EMAIL · Email / Tickets</option>
+                                <option value="SK-WAPP">SK-WAPP · WhatsApp Business</option>
+                                <option value="SK-BO">SK-BO · Back Office</option>
+                                <option value="SK-ALL">SK-ALL · Combinado Omnicanal</option>
+                                <option value="SK-TIER2">SK-TIER2 · Tier 2 Especializado</option>
+                            </select>
+                            <input type="text" id="new-skill-name" required placeholder="Nombre de la Campaña" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            <div class="flex gap-2">
+                                <input type="text" id="new-skill-client" required placeholder="Cliente" class="flex-1 px-3 py-2 border rounded-lg text-sm">
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">Agregar</button>
+                            </div>
+                        </form>
+                        <div id="admin-skills-list" class="divide-y divide-slate-200 max-h-96 overflow-y-auto"></div>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">Directorio y Control de Usuarios (19 Perfiles)</h3>
+                            <button type="button" onclick="abrirModalUsuario()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-1.5 shadow-sm">
+                                <i data-lucide="user-plus" class="w-4 h-4"></i> Nuevo Usuario
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b">
+                                        <th class="py-2.5 px-3">Colaborador / Código</th>
+                                        <th class="py-2.5 px-3">Tipo de Usuario (Permisos)</th>
+                                        <th class="py-2.5 px-3">Site</th>
+                                        <th class="py-2.5 px-3">Estado</th>
+                                        <th class="py-2.5 px-3 text-right">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-users-list" class="divide-y divide-slate-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-tiempos" class="hidden space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-5 border-b border-slate-200 flex flex-wrap justify-between items-center gap-3">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <h2 class="font-bold text-lg text-slate-900">Control de Tiempos</h2>
+                            <button type="button" onclick="abrirModalTiempoMuerto()"
+                                class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-sm flex items-center gap-1.5 transition">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> + Tiempo Muerto
+                            </button>
+                            <button type="button" onclick="alternarVistaTiempoMuerto()" id="btn-toggle-registro-tm"
+                                class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm flex items-center gap-1.5 transition">
+                                <i data-lucide="list-checks" class="w-4 h-4"></i> Registro de Tiempo Muerto
+                            </button>
+                        </div>
+                        <button type="button" onclick="refrescarTablasTiempos()" class="text-sm text-blue-600 hover:underline flex items-center gap-1 font-medium">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Actualizar
+                        </button>
+                    </div>
+
+                    <div id="vista-tabla-actividad-pantallas" class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b">
+                                    <th class="py-3 px-4">Colaborador</th>
+                                    <th class="py-3 px-4">Rol</th>
+                                    <th class="py-3 px-4">Pantalla / Actividad</th>
+                                    <th class="py-3 px-4">Duplicado</th>
+                                    <th class="py-3 px-4">Hora Inicio</th>
+                                    <th class="py-3 px-4">Hora Fin</th>
+                                    <th class="py-3 px-4">Duración</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-tiempos-body" class="divide-y divide-slate-200"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="vista-tabla-tiempo-muerto" class="hidden overflow-x-auto">
+                        <div class="bg-amber-50 px-5 py-2.5 border-b border-amber-200 flex justify-between items-center">
+                            <span class="text-xs font-bold text-amber-900 uppercase">Historial de Tiempo Muerto Registrado</span>
+                            <button type="button" onclick="alternarVistaTiempoMuerto(false)" class="text-xs text-blue-700 font-bold hover:underline">
+                                ← Volver a Tiempos por Pantalla
+                            </button>
+                        </div>
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b">
+                                    <th class="py-3 px-4">Fecha y Hora</th>
+                                    <th class="py-3 px-4">Colaborador</th>
+                                    <th class="py-3 px-4">Rol</th>
+                                    <th class="py-3 px-4">Razón</th>
+                                    <th class="py-3 px-4">Comentarios</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-tiempo-muerto-body" class="divide-y divide-slate-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-tiempo-muerto" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-amber-200">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                        <i data-lucide="pause-circle" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Registrar Tiempo Muerto</h3>
+                </div>
+                <button type="button" onclick="cerrarModalTiempoMuerto()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <form id="form-tiempo-muerto" class="space-y-4 text-sm">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Selecciona la Razón *</label>
+                    <select id="tm-razon-select" required class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white font-medium">
+                        <option value="">-- Selecciona una opción obligatoria --</option>
+                        <option value="Revision de metricas">Revisión de métricas</option>
+                        <option value="Problemas del sistema">Problemas del sistema</option>
+                        <option value="Reuniones">Reuniones</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Comentarios (Sin límite de escritura) *</label>
+                    <textarea id="tm-comentarios" required rows="4" oninput="autoExpandirTextarea(this)"
+                        placeholder="Detalla el motivo o actividad realizada durante este tiempo muerto..."
+                        class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 outline-none"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="cerrarModalTiempoMuerto()" class="px-4 py-2 border rounded-lg text-slate-600 font-medium">Cancelar</button>
+                    <button type="submit" id="btn-guardar-tiempo-muerto" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg shadow flex items-center gap-1.5">
+                        <i data-lucide="save" class="w-4 h-4"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-detalle" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div id="ficha-evaluacion-capturable" class="bg-white p-4 rounded-xl space-y-4">
+                <div class="flex justify-between items-start border-b border-slate-200 pb-3">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600">GAMA Quality Consulting · Ficha de Evaluación</span>
+                        <h3 id="modal-titulo" class="text-xl font-extrabold text-slate-900 mt-0.5"></h3>
+                        <p id="modal-subtitulo" class="text-xs text-slate-500 mt-0.5"></p>
+                    </div>
+                    <span id="modal-estado-badge" class="text-xs font-bold px-3 py-1 rounded-full"></span>
+                </div>
+                <div id="modal-contenido" class="space-y-4 text-sm"></div>
+            </div>
+
+            <div id="box-enviar-correo-ficha" class="hidden mt-4 bg-blue-50/80 border border-blue-200 p-4 rounded-xl space-y-2.5">
+                <label class="block text-xs font-bold text-blue-950">Ingresa el correo electrónico de destino:</label>
+                <div class="flex gap-2">
+                    <input type="email" id="input-correo-destino-ficha" placeholder="destinatario@empresa.com"
+                        class="flex-1 px-3 py-2 rounded-lg border border-blue-300 bg-white text-sm outline-none focus:ring-2 focus:ring-blue-600">
+                    <button type="button" id="btn-ejecutar-envio-correo" onclick="enviarFichaPorCorreo()"
+                        class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center gap-1.5">
+                        <i data-lucide="send" class="w-3.5 h-3.5"></i> Enviar Ahora
+                    </button>
+                </div>
+            </div>
+
+            <div id="modal-footer" class="mt-5 pt-4 border-t border-slate-200 flex flex-wrap justify-between items-center gap-2"></div>
+        </div>
+    </div>
+
+    <div id="modal-eliminar-eval" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-red-200">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-4">
+                <div class="flex items-center gap-2.5 text-red-700">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Eliminar Evaluación <span id="del-eval-numero-label" class="text-red-600"></span></h3>
+                </div>
+                <button type="button" onclick="cancelarProcesoEliminacion()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <form id="form-eliminar-eval" class="space-y-4 text-sm">
+                <input type="hidden" id="del-eval-uuid">
+
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">1. Selecciona el motivo de eliminación *</label>
+                    <select id="del-motivo-select" required onchange="actualizarCamposCondicionalesBorrado()" class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white font-medium">
+                        <option value="">-- Selecciona una opción obligatoria --</option>
+                        <option value="Problemas de audio/mensajes">Problemas de audio/mensajes</option>
+                        <option value="Duplicada">Duplicada</option>
+                        <option value="Crear Manual">Crear Manual</option>
+                    </select>
+                </div>
+
+                <div id="del-box-duplicada" class="hidden bg-amber-50 p-3.5 rounded-xl border border-amber-200">
+                    <label class="block font-bold text-amber-900 text-xs mb-1">Número de Evaluación de la cual se duplicó *</label>
+                    <input type="number" id="del-num-duplicada" min="1" placeholder="Ej. 14" class="w-full px-3 py-2 rounded-lg border border-amber-300 bg-white text-sm">
+                </div>
+
+                <div id="del-box-manual" class="hidden bg-blue-50 p-3.5 rounded-xl border border-blue-200">
+                    <label class="block font-bold text-blue-900 text-xs mb-1">Número de Evaluación generada Manual *</label>
+                    <input type="number" id="del-num-manual" min="1" placeholder="Ej. 22" class="w-full px-3 py-2 rounded-lg border border-blue-300 bg-white text-sm">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">2. Razón y explicación detallada del porqué se borra *</label>
+                    <textarea id="del-justificacion" required rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm"></textarea>
+                </div>
+
+                <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">3. Firma de Seguridad · Ingresa tu Contraseña *</label>
+                    <input type="password" id="del-password-confirm" required placeholder="Tu contraseña actual"
+                        class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                </div>
+
+                <p id="del-error-msg" class="text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-lg font-semibold hidden"></p>
+
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="cancelarProcesoEliminacion()" class="px-4 py-2 border rounded-lg text-slate-600 font-medium">Cancelar</button>
+                    <button type="submit" id="btn-preparar-captura-borrado" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow flex items-center gap-1.5">
+                        <i data-lucide="camera" class="w-4 h-4"></i> Continuar y Capturar Evaluación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-confirmar-imagen-borrado" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[94vh] overflow-y-auto shadow-2xl border-2 border-red-500">
+            <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl mb-4 flex items-start gap-3">
+                <i data-lucide="alert-triangle" class="w-6 h-6 text-red-600 shrink-0 mt-0.5"></i>
+                <div>
+                    <h4 class="font-extrabold text-red-900 text-sm">¿Está seguro de borrar esta evaluación?</h4>
+                    <p class="text-xs text-red-800 mt-1">
+                        Se enviará un correo con la imagen exacta de la evaluación borrada a <strong>digitalentrepreneurhn@gmail.com</strong> y el número no volverá a utilizarse.
+                    </p>
+                </div>
+            </div>
+
+            <div id="contenedor-captura-aislada-eval" class="bg-white border border-slate-300 rounded-xl p-5 shadow-inner space-y-3 text-sm"></div>
+
+            <div class="mt-5 pt-4 border-t border-slate-200 flex flex-col sm:flex-row justify-end gap-3">
+                <button type="button" onclick="cancelarProcesoEliminacion()" class="px-5 py-2.5 border border-slate-300 rounded-xl text-slate-700 font-semibold hover:bg-slate-50">
+                    No borrar (Cancelar)
+                </button>
+                <button type="button" id="btn-ejecutar-borrado-y-cerrar" onclick="ejecutarBorradoDefinitivoConImagen()"
+                    class="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Sí, Borrar Evaluación y Enviar Imagen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-usuario" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 id="modal-user-titulo" class="text-lg font-bold text-slate-900">Registrar Nuevo Usuario</h3>
+                <button type="button" onclick="cerrarModalUsuario()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form id="user-crud-form" class="space-y-4 text-sm">
+                <input type="hidden" id="edit-user-id">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Nombre Completo *</label>
+                        <input type="text" id="user-nombre" required class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Código Empleado *</label>
+                        <input type="text" id="user-codigo" required placeholder="Ej. EMP-1001 o QA-101" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+                <div id="grupo-credenciales-nuevas" class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Correo Corporativo *</label>
+                        <input type="email" id="user-correo" required class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Contraseña Temporal *</label>
+                        <input type="password" id="user-password" minlength="6" placeholder="Clave temporal" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Tipo de Usuario (Permisos) *</label>
+                        <select id="user-rol" required onchange="autoAsignarQueuesPorNivelRol()" class="w-full px-3 py-2 border rounded-lg bg-white">
+                            <option value="Agente">Agente</option>
+                            <option value="QA Nivel 1">QA Nivel 1 (Voice)</option>
+                            <option value="QA Nivel 2">QA Nivel 2 (Voice + TL)</option>
+                            <option value="QA Nivel 3">QA Nivel 3 (+ Chat)</option>
+                            <option value="QA Nivel 4">QA Nivel 4 (+ Chat TL)</option>
+                            <option value="QA Nivel 5">QA Nivel 5 (+ Voice/Chat CSAT)</option>
+                            <option value="QA Nivel 6">QA Nivel 6 (+ Email + Email CSAT)</option>
+                            <option value="QA Nivel 7">QA Nivel 7 (+ Email TL)</option>
+                            <option value="QA Nivel 8">QA Nivel 8 (+ WhatsApp + CSAT)</option>
+                            <option value="QA Nivel 9">QA Nivel 9 (+ WhatsApp TL)</option>
+                            <option value="QA Nivel 10">QA Nivel 10 (+ Back Office)</option>
+                            <option value="QA Nivel 11">QA Nivel 11 (+ Back Office TL)</option>
+                            <option value="QA Nivel 12">QA Nivel 12 (+ Auditorías · Completo)</option>
+                            <option value="Supervisor QA">Supervisor QA</option>
+                            <option value="Team Lead">Team Lead</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Cliente">Cliente</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Site / Ubicación</label>
+                        <input type="text" id="user-site" placeholder="Ej. San Pedro Sula" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Supervisor Asignado</label>
+                        <select id="user-supervisor" class="w-full px-3 py-2 border rounded-lg bg-white"></select>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-700 mb-1">Manager Asignado</label>
+                        <select id="user-manager" class="w-full px-3 py-2 border rounded-lg bg-white"></select>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <label class="block font-bold text-xs uppercase text-slate-700 mb-2">Queues Habilitadas (Según Nivel/Skill)</label>
+                    <div id="checkboxes-queues-usuario" class="grid grid-cols-2 gap-2 text-xs"></div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <label class="inline-flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="user-activo" checked class="rounded text-blue-600">
+                        <span class="text-slate-700 font-medium">Usuario Activo</span>
+                    </label>
+                    <label class="inline-flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="user-force-pwd" checked class="rounded text-amber-600">
+                        <span class="text-slate-700 font-medium">Exigir cambio de clave</span>
+                    </label>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <button type="button" onclick="cerrarModalUsuario()" class="px-4 py-2 border rounded-lg text-slate-600">Cancelar</button>
+                    <button type="submit" id="btn-guardar-usuario" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        const SUPABASE_URL = 'https://izrbsjpfwahvwmqfppbv.supabase.co';
+
+        const SUPABASE_ANON_KEY = 'sb_publishable_w0letHoOUzJhQIaxAHHXlA_l04hRMpz';
+
+        const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxrvvS5xmCcc-MegxDGkt2g_nUJ_42HGJhTGxTaw2fV8gy8wbS8j8-kEtwlq29iniXJ/exec';
+
+        const GOOGLE_SHEETS_EVALUACIONES_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzF9hp3fXVAHfacF5s2OkZ6bHoyKD2-_eLEJxUhaFzwffosxhl_HV1jZV4ujOCCnnMK/exec';
+
+        const AUDIT_DELETE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz_90J5z-taCiO2dGI0Uyy9-y2tWlFw_i_khMkzGFdIaEQkxpyIr4UZMTfwoStwtReJ/exec';
+        const EMAIL_AUDITORIA_BORRADO = 'digitalentrepreneurhn@gmail.com';
+
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const sbRegistro = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: false, autoRefreshToken: false }
+        });
+
+        let perfilActual = null;
+        let usuariosCache = [];
+        let rubricasCache = [];
+        let evaluacionesCache = [];
+        let criterioActualItems = [];
+        let intervaloReloj = null;
+        let tabActualId = 'tab-mis-metricas';
+        let evaluacionVistaPopUpActual = null;
+        let contextoBorradoActivo = null;
+
+        const TIPOS_SKILLS_ROSTER = [
+            { tipo: 'SK-VOICE', descripcion: 'Voice (Llamadas Inbound / Outbound)', agente: 'Agente Voice' },
+            { tipo: 'SK-CHAT', descripcion: 'Chat en Vivo / Mensajería Web', agente: 'Agente Chat' },
+            { tipo: 'SK-EMAIL', descripcion: 'Email / Gestión de Tickets', agente: 'Agente Email' },
+            { tipo: 'SK-WAPP', descripcion: 'WhatsApp Business Omnicanal', agente: 'Agente WhatsApp' },
+            { tipo: 'SK-BO', descripcion: 'Back Office / Procesamiento', agente: 'Agente Back Office' },
+            { tipo: 'SK-ALL', descripcion: 'Combinado Omnicanal (Voice/Chat/Email)', agente: 'Agente Multi-Skill' },
+            { tipo: 'SK-TIER2', descripcion: 'Soporte Técnico Tier 2 / Especializado', agente: 'Agente Tier 2' }
+        ];
+        const CAMPANAS_EJEMPLO_ROSTER = [
+            { id: 'CMP-101', nombre_skill: 'Retención y Fidelización (SK-VOICE)', cliente_asociado: 'GlobalRetail', activa: true },
+            { id: 'CMP-102', nombre_skill: 'Campaña Promocional CyberWeek (SK-EMAIL)', cliente_asociado: 'GlobalRetail', activa: true },
+            { id: 'CMP-103', nombre_skill: 'Cobranza Preventiva (SK-TIER2)', cliente_asociado: 'FinCorp', activa: true },
+            { id: 'CMP-104', nombre_skill: 'Ventas y Renovaciones (SK-CHAT)', cliente_asociado: 'FinCorp', activa: true },
+            { id: 'CMP-105', nombre_skill: 'Onboarding de Usuarios Cloud (SK-ALL)', cliente_asociado: 'CloudSolutions', activa: true },
+            { id: 'CMP-106', nombre_skill: 'Soporte Técnico Tier 2 (SK-WAPP)', cliente_asociado: 'CloudSolutions', activa: true },
+            { id: 'CMP-107', nombre_skill: 'Mesa de Ayuda Salud 24/7 (SK-BO)', cliente_asociado: 'HealthPlus', activa: true },
+            { id: 'CMP-108', nombre_skill: 'Autorizaciones y Reclamos Médicos (SK-ALL)', cliente_asociado: 'HealthPlus', activa: true },
+            { id: 'CMP-109', nombre_skill: 'Atención al Cliente Omnicanal (SK-VOICE)', cliente_asociado: 'GlobalRetail', activa: true },
+            { id: 'CMP-110', nombre_skill: 'Verificación y Validación de Fraude (SK-CHAT)', cliente_asociado: 'FinCorp', activa: true }
+        ];
+        function poblarSelectorTiposSkills() {
+            const sel = document.getElementById('new-skill-type');
+            if (!sel) return;
+            sel.innerHTML = TIPOS_SKILLS_ROSTER.map(s => `<option value="${s.tipo}">${s.tipo} · ${s.descripcion}</option>`).join('');
+        }
+
+        const ROSTER_DATA_PRUEBA = [
+            { nombre: 'Carlos Mendoza', rol: 'Agente 1', skill: 'SK-VOICE', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1001', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Retención y Fidelización' },
+            { nombre: 'Sofía Martínez', rol: 'Agente 3', skill: 'SK-EMAIL', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1002', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Campaña Promocional CyberWeek' },
+            { nombre: 'Alejandro Castro', rol: 'Agente 7', skill: 'SK-TIER2', supervisor: 'Marco Rivera', manager: 'Elena Vargas', codigo: 'EMP-1003', site: 'San Pedro Sula', vendor: 'ApexBPO', client: 'FinCorp', campana: 'Cobranza Preventiva' },
+            { nombre: 'Valeria Reyes', rol: 'Agente 2', skill: 'SK-CHAT', supervisor: 'Marco Rivera', manager: 'Elena Vargas', codigo: 'EMP-1004', site: 'San Pedro Sula', vendor: 'ApexBPO', client: 'FinCorp', campana: 'Ventas y Renovaciones' },
+            { nombre: 'Diego Hernández', rol: 'Agente 6', skill: 'SK-ALL', supervisor: 'Andrés Pineda', manager: 'Ricardo Morales', codigo: 'EMP-1005', site: 'Ciudad de México', vendor: 'ConnectPro', client: 'CloudSolutions', campana: 'Onboarding de Usuarios Cloud' },
+            { nombre: 'Camila López', rol: 'Agente 4', skill: 'SK-WAPP', supervisor: 'Andrés Pineda', manager: 'Ricardo Morales', codigo: 'EMP-1006', site: 'Ciudad de México', vendor: 'ConnectPro', client: 'CloudSolutions', campana: 'Soporte Técnico Tier 2' },
+            { nombre: 'Javier Flores', rol: 'Agente 5', skill: 'SK-BO', supervisor: 'Patricia Núñez', manager: 'Elena Vargas', codigo: 'EMP-1007', site: 'Bogotá', vendor: 'DataCore', client: 'HealthPlus', campana: 'Mesa de Ayuda Salud 24/7' },
+            { nombre: 'Lucía Ramírez', rol: 'Agente 6', skill: 'SK-ALL', supervisor: 'Patricia Núñez', manager: 'Elena Vargas', codigo: 'EMP-1008', site: 'Bogotá', vendor: 'DataCore', client: 'HealthPlus', campana: 'Autorizaciones y Reclamos Médicos' },
+            { nombre: 'Mateo Sánchez', rol: 'Agente 1', skill: 'SK-VOICE', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1009', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Atención al Cliente Omnicanal' },
+            { nombre: 'Isabella Torres', rol: 'Agente 7', skill: 'SK-TIER2', supervisor: 'Andrés Pineda', manager: 'Ricardo Morales', codigo: 'EMP-1010', site: 'Remoto', vendor: 'ConnectPro', client: 'CloudSolutions', campana: 'Onboarding de Usuarios Cloud' },
+            { nombre: 'Fernando Gómez', rol: 'Agente 2', skill: 'SK-CHAT', supervisor: 'Marco Rivera', manager: 'Elena Vargas', codigo: 'EMP-1011', site: 'San Pedro Sula', vendor: 'ApexBPO', client: 'FinCorp', campana: 'Verificación y Validación de Fraude' },
+            { nombre: 'Mariana Castillo', rol: 'Agente 3', skill: 'SK-EMAIL', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1012', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Retención y Fidelización' },
+            { nombre: 'Gabriel Ortiz', rol: 'Agente 5', skill: 'SK-BO', supervisor: 'Patricia Núñez', manager: 'Elena Vargas', codigo: 'EMP-1013', site: 'Bogotá', vendor: 'DataCore', client: 'HealthPlus', campana: 'Autorizaciones y Reclamos Médicos' },
+            { nombre: 'Daniela Morales', rol: 'Agente 4', skill: 'SK-WAPP', supervisor: 'Andrés Pineda', manager: 'Ricardo Morales', codigo: 'EMP-1014', site: 'Ciudad de México', vendor: 'ConnectPro', client: 'CloudSolutions', campana: 'Soporte Técnico Tier 2' },
+            { nombre: 'Rodrigo Navarro', rol: 'Agente 1', skill: 'SK-VOICE', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1015', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Atención al Cliente Omnicanal' },
+            { nombre: 'Natalia Herrera', rol: 'Agente 7', skill: 'SK-TIER2', supervisor: 'Marco Rivera', manager: 'Elena Vargas', codigo: 'EMP-1016', site: 'San Pedro Sula', vendor: 'ApexBPO', client: 'FinCorp', campana: 'Verificación y Validación de Fraude' },
+            { nombre: 'Sebastián Cruz', rol: 'Agente 2', skill: 'SK-CHAT', supervisor: 'Andrés Pineda', manager: 'Ricardo Morales', codigo: 'EMP-1017', site: 'Remoto', vendor: 'ConnectPro', client: 'CloudSolutions', campana: 'Soporte Técnico Tier 2' },
+            { nombre: 'Andrea Silva', rol: 'Agente 6', skill: 'SK-ALL', supervisor: 'Patricia Núñez', manager: 'Elena Vargas', codigo: 'EMP-1018', site: 'Bogotá', vendor: 'DataCore', client: 'HealthPlus', campana: 'Mesa de Ayuda Salud 24/7' },
+            { nombre: 'Leonardo Vargas', rol: 'Agente 3', skill: 'SK-EMAIL', supervisor: 'Marco Rivera', manager: 'Elena Vargas', codigo: 'EMP-1019', site: 'San Pedro Sula', vendor: 'ApexBPO', client: 'FinCorp', campana: 'Ventas y Renovaciones' },
+            { nombre: 'Valentina Rojas', rol: 'Agente 5', skill: 'SK-BO', supervisor: 'Laura Gómez', manager: 'Ricardo Morales', codigo: 'EMP-1020', site: 'Tegucigalpa', vendor: 'TechServe', client: 'GlobalRetail', campana: 'Campaña Promocional CyberWeek' }
+        ];
+
+        const DATA_OPERACIONES_DASHBOARD = [
+            { id: 'EV-1001', codigo: 'EMP-1001', agente: 'Carlos Mendoza', supervisor: 'Laura Gómez', campana: 'Retención y Fidelización', fecha: '2026-11-02', aht: 315, puntaje: 94.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Andrea Morales' },
+            { id: 'EV-1002', codigo: 'EMP-1001', agente: 'Carlos Mendoza', supervisor: 'Laura Gómez', campana: 'Retención y Fidelización', fecha: '2026-11-05', aht: 298, puntaje: 91.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Carlos Fuentes' },
+            { id: 'EV-1003', codigo: 'EMP-1001', agente: 'Carlos Mendoza', supervisor: 'Laura Gómez', campana: 'Retención y Fidelización', fecha: '2026-11-09', aht: 340, puntaje: 88.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Elena Paz' },
+            { id: 'EV-1004', codigo: 'EMP-1001', agente: 'Carlos Mendoza', supervisor: 'Laura Gómez', campana: 'Retención y Fidelización', fecha: '2026-11-13', aht: 310, puntaje: 96.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Roberto Solís' },
+            { id: 'EV-1005', codigo: 'EMP-1001', agente: 'Carlos Mendoza', supervisor: 'Laura Gómez', campana: 'Retención y Fidelización', fecha: '2026-11-17', aht: 325, puntaje: 82.0, fallaCritica: true, confirmacion: 'Pendiente', qa: 'Jessica Meza' },
+            { id: 'EV-1006', codigo: 'EMP-1002', agente: 'Sofía Martínez', supervisor: 'Laura Gómez', campana: 'Campaña Promocional CyberWeek', fecha: '2026-11-03', aht: 280, puntaje: 98.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Andrea Morales' },
+            { id: 'EV-1007', codigo: 'EMP-1003', agente: 'Alejandro Castro', supervisor: 'Marco Rivera', campana: 'Cobranza Preventiva', fecha: '2026-11-04', aht: 350, puntaje: 89.5, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Carlos Fuentes' },
+            { id: 'EV-1008', codigo: 'EMP-1004', agente: 'Valeria Reyes', supervisor: 'Marco Rivera', campana: 'Ventas y Renovaciones', fecha: '2026-11-06', aht: 265, puntaje: 95.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Elena Paz' },
+            { id: 'EV-1009', codigo: 'EMP-1005', agente: 'Diego Hernández', supervisor: 'Andrés Pineda', campana: 'Onboarding de Usuarios Cloud', fecha: '2026-11-08', aht: 305, puntaje: 92.0, fallaCritica: false, confirmacion: 'Pendiente', qa: 'Roberto Solís' },
+            { id: 'EV-1010', codigo: 'EMP-1006', agente: 'Camila López', supervisor: 'Andrés Pineda', campana: 'Soporte Técnico Tier 2', fecha: '2026-11-10', aht: 290, puntaje: 97.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Jessica Meza' },
+            { id: 'EV-1011', codigo: 'EMP-1007', agente: 'Javier Flores', supervisor: 'Patricia Núñez', campana: 'Mesa de Ayuda Salud 24/7', fecha: '2026-11-12', aht: 330, puntaje: 86.0, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Andrea Morales' },
+            { id: 'EV-1012', codigo: 'EMP-1008', agente: 'Lucía Ramírez', supervisor: 'Patricia Núñez', campana: 'Autorizaciones y Reclamos Médicos', fecha: '2026-11-14', aht: 312, puntaje: 93.5, fallaCritica: false, confirmacion: 'Confirmada', qa: 'Carlos Fuentes' }
+        ];
+
+        const DATA_QA_DASHBOARD = [
+            { id: 'QA-REG-01', codigo: 'QA-101', qa: 'Andrea Morales', supervisorQA: 'Elena Vargas', periodo: 'Semana 1', horas: 40, asignadas: 65, realizadas: 68, errores: 1, evalHora: 1.70, tasaError: 1.5, cumplimiento: 104.6, calidadRecibida: 95.0 },
+            { id: 'QA-REG-02', codigo: 'QA-101', qa: 'Andrea Morales', supervisorQA: 'Elena Vargas', periodo: 'Semana 2', horas: 40, asignadas: 65, realizadas: 66, errores: 2, evalHora: 1.65, tasaError: 3.0, cumplimiento: 101.5, calidadRecibida: 98.0 },
+            { id: 'QA-REG-03', codigo: 'QA-101', qa: 'Andrea Morales', supervisorQA: 'Elena Vargas', periodo: 'Semana 3', horas: 40, asignadas: 65, realizadas: 70, errores: 1, evalHora: 1.75, tasaError: 1.4, cumplimiento: 107.7, calidadRecibida: 94.0 },
+            { id: 'QA-REG-04', codigo: 'QA-101', qa: 'Andrea Morales', supervisorQA: 'Elena Vargas', periodo: 'Semana 4', horas: 40, asignadas: 65, realizadas: 67, errores: 0, evalHora: 1.68, tasaError: 0.0, cumplimiento: 103.1, calidadRecibida: 97.0 },
+            { id: 'QA-REG-05', codigo: 'QA-102', qa: 'Carlos Fuentes', supervisorQA: 'Ricardo Morales', periodo: 'Semana 1', horas: 40, asignadas: 65, realizadas: 64, errores: 3, evalHora: 1.60, tasaError: 4.7, cumplimiento: 98.5, calidadRecibida: 92.0 },
+            { id: 'QA-REG-06', codigo: 'QA-102', qa: 'Carlos Fuentes', supervisorQA: 'Ricardo Morales', periodo: 'Semana 2', horas: 40, asignadas: 65, realizadas: 63, errores: 2, evalHora: 1.58, tasaError: 3.2, cumplimiento: 96.9, calidadRecibida: 94.5 },
+            { id: 'QA-REG-07', codigo: 'QA-103', qa: 'Elena Paz', supervisorQA: 'Elena Vargas', periodo: 'Semana 1', horas: 40, asignadas: 65, realizadas: 69, errores: 1, evalHora: 1.73, tasaError: 1.4, cumplimiento: 106.2, calidadRecibida: 96.5 },
+            { id: 'QA-REG-08', codigo: 'QA-104', qa: 'Roberto Solís', supervisorQA: 'Ricardo Morales', periodo: 'Semana 1', horas: 40, asignadas: 65, realizadas: 66, errores: 1, evalHora: 1.65, tasaError: 1.5, cumplimiento: 101.5, calidadRecibida: 95.5 },
+            { id: 'QA-REG-09', codigo: 'QA-105', qa: 'Jessica Meza', supervisorQA: 'Elena Vargas', periodo: 'Semana 1', horas: 40, asignadas: 65, realizadas: 67, errores: 2, evalHora: 1.68, tasaError: 3.0, cumplimiento: 103.1, calidadRecibida: 93.0 }
+        ];
+
+        const PERMISOS_SUBCATEGORIAS_POR_ROL = {
+            'QA Nivel 1': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva'],
+            'QA Nivel 2': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual'],
+            'QA Nivel 3': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva'],
+            'QA Nivel 4': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual'],
+            'QA Nivel 5': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT'],
+            'QA Nivel 6': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT'],
+            'QA Nivel 7': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT', 'Email::Crear TL', 'Email::Crear TL manual'],
+            'QA Nivel 8': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT', 'Email::Crear TL', 'Email::Crear TL manual', 'WhatsApp::Crear nueva evaluación', 'WhatsApp::Crear evaluación manual nueva', 'CSAT::Crear nueva WhatsApp CSAT'],
+            'QA Nivel 9': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT', 'Email::Crear TL', 'Email::Crear TL manual', 'WhatsApp::Crear nueva evaluación', 'WhatsApp::Crear evaluación manual nueva', 'CSAT::Crear nueva WhatsApp CSAT', 'WhatsApp::Crear TL', 'WhatsApp::Crear TL manual'],
+            'QA Nivel 10': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT', 'Email::Crear TL', 'Email::Crear TL manual', 'WhatsApp::Crear nueva evaluación', 'WhatsApp::Crear evaluación manual nueva', 'CSAT::Crear nueva WhatsApp CSAT', 'WhatsApp::Crear TL', 'WhatsApp::Crear TL manual', 'Back Office/Ticket::Crear nueva evaluación'],
+            'QA Nivel 11': ['Voice::Crear nueva evaluación', 'Voice::Crear evaluación manual nueva', 'Voice::Crear TL', 'Voice::Crear TL manual', 'Chat::Crear nueva evaluación', 'Chat::Crear evaluación manual nueva', 'Chat::Crear TL', 'Chat::Crear TL manual', 'CSAT::Crear nueva Voice CSAT', 'CSAT::Crear nueva Chat CSAT', 'Email::Crear nueva evaluación', 'Email::Crear evaluación manual nueva', 'CSAT::Crear nueva Email CSAT', 'Email::Crear TL', 'Email::Crear TL manual', 'WhatsApp::Crear nueva evaluación', 'WhatsApp::Crear evaluación manual nueva', 'CSAT::Crear nueva WhatsApp CSAT', 'WhatsApp::Crear TL', 'WhatsApp::Crear TL manual', 'Back Office/Ticket::Crear nueva evaluación', 'Back Office/Ticket::Crear TL', 'Back Office/Ticket::Crear TL manual'],
+            'QA Nivel 12': ['ALL']
+        };
+
+        const TAB_INSTANCE_ID = sessionStorage.getItem('gama_tab_id') || (`tab_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
+
+        sessionStorage.setItem('gama_tab_id', TAB_INSTANCE_ID);
+
+        let canalPestanas = null;
+        let pestanasActivasMismoUsuario = {};
+
+        function iniciarDeteccionMultiPestana(userId) {
+            if (canalPestanas) canalPestanas.close();
+            pestanasActivasMismoUsuario = {};
+            if (!('BroadcastChannel' in window)) return;
+
+            canalPestanas = new BroadcastChannel(`gama_tabs_channel_${userId}`);
+            canalPestanas.onmessage = (event) => {
+                const msg = event.data;
+                if (!msg || msg.userId !== userId || msg.tabId === TAB_INSTANCE_ID) return;
+
+                if (msg.type === 'HEARTBEAT') {
+                    pestanasActivasMismoUsuario[msg.tabId] = { etiqueta: msg.etiqueta, ts: Date.now() };
+                } else if (msg.type === 'CLOSING') {
+                    delete pestanasActivasMismoUsuario[msg.tabId];
+                }
+                actualizarEstadoDuplicadoUI();
+            };
+
+            setInterval(() => {
+                if (!perfilActual) return;
+                const ahora = Date.now();
+                Object.keys(pestanasActivasMismoUsuario).forEach(tid => {
+                    if (ahora - pestanasActivasMismoUsuario[tid].ts > 5500) {
+                        delete pestanasActivasMismoUsuario[tid];
+                    }
+                });
+
+                const etiquetaActual = NOMBRES_PANTALLAS[tabActualId] || tabActualId;
+                canalPestanas.postMessage({
+                    type: 'HEARTBEAT',
+                    userId: perfilActual.id,
+                    tabId: TAB_INSTANCE_ID,
+                    etiqueta: etiquetaActual
+                });
+                actualizarEstadoDuplicadoUI();
+            }, 2000);
+
+            window.addEventListener('beforeunload', () => {
+                if (canalPestanas && perfilActual) {
+                    canalPestanas.postMessage({ type: 'CLOSING', userId: perfilActual.id, tabId: TAB_INSTANCE_ID });
+                }
+            });
+        }
+
+        function obtenerInfoDuplicadoActual() {
+            const otras = Object.values(pestanasActivasMismoUsuario).map(x => x.etiqueta);
+            const unicas = [...new Set(otras)];
+            return {
+                esDuplicado: unicas.length > 0,
+                paginasAbiertas: unicas.join(', ')
+            };
+        }
+
+        function actualizarEstadoDuplicadoUI() {
+            const info = obtenerInfoDuplicadoActual();
+            const badgeHeader = document.getElementById('badge-ventana-secundaria');
+            if (badgeHeader) {
+                badgeHeader.classList.toggle('hidden', !info.esDuplicado);
+                if (info.esDuplicado) badgeHeader.title = `También abierta en: ${info.paginasAbiertas}`;
+            }
+        }
+
+        const NOMBRES_PANTALLAS = {
+            'tab-mis-metricas': 'Mis Métricas y Evaluaciones',
+            'tab-ver-evaluaciones': 'Ver Evaluaciones',
+            'tab-nueva-eval': 'Nueva Evaluación',
+            'tab-admin': 'Administración (Skills y Usuarios)',
+            'tab-tiempos': 'Control de Tiempos'
+        };
+
+        const QUEUES_EVALUACION = [
+            {
+                canal: 'Voice',
+                titulo: 'Queue: Voice (Llamadas)',
+                icono: 'phone-call',
+                subcategorias: ['Crear nueva evaluación', 'Crear evaluación manual nueva', 'Crear TL', 'Crear TL manual']
+            },
+            {
+                canal: 'Chat',
+                titulo: 'Queue: Chat en Vivo',
+                icono: 'message-square',
+                subcategorias: ['Crear nueva evaluación', 'Crear evaluación manual nueva', 'Crear TL', 'Crear TL manual']
+            },
+            {
+                canal: 'Email',
+                titulo: 'Queue: Email / Correo',
+                icono: 'mail',
+                subcategorias: ['Crear nueva evaluación', 'Crear evaluación manual nueva', 'Crear TL', 'Crear TL manual']
+            },
+            {
+                canal: 'WhatsApp',
+                titulo: 'Queue: WhatsApp Business',
+                icono: 'smartphone',
+                subcategorias: ['Crear nueva evaluación', 'Crear evaluación manual nueva', 'Crear TL', 'Crear TL manual']
+            },
+            {
+                canal: 'Back Office/Ticket',
+                titulo: 'Queue: Back Office / Ticket',
+                icono: 'layers',
+                subcategorias: ['Crear nueva evaluación', 'Crear TL', 'Crear TL manual']
+            },
+            {
+                canal: 'Auditorias',
+                titulo: 'Queue: Auditorías',
+                icono: 'clipboard-check',
+                subcategorias: ['Crear nueva evaluación']
+            },
+            {
+                canal: 'CSAT',
+                titulo: 'Queue: Encuestas CSAT',
+                icono: 'smile',
+                subcategorias: [
+                    'Crear nueva Voice CSAT',
+                    'Crear nueva Chat CSAT',
+                    'Crear nueva Email CSAT',
+                    'Crear nueva WhatsApp CSAT'
+                ]
+            },
+            {
+                canal: 'Project',
+                titulo: 'Queue: Project / Especiales',
+                icono: 'briefcase',
+                subcategorias: ['Crear nueva evaluación']
+            }
+        ];
+
+        if (window.lucide) lucide.createIcons();
+
+        function autoExpandirTextarea(el) {
+            el.style.height = 'auto';
+            el.style.height = (el.scrollHeight) + 'px';
+        }
+
+        function mostrarVista(vistaId) {
+            ['landing-view', 'login-view', 'force-password-view', 'app-view'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(vistaId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function evaluarFuerzaPassword() {
+            const pwd = document.getElementById('new-strong-password').value;
+            const checks = {
+                len: pwd.length >= 10,
+                upper: /[A-Z]/.test(pwd),
+                lower: /[a-z]/.test(pwd),
+                num: /[0-9]/.test(pwd),
+                sym: /[^A-Za-z0-9]/.test(pwd)
+            };
+
+            const mapIds = { len: 'req-len', upper: 'req-upper', lower: 'req-lower', num: 'req-num', sym: 'req-sym' };
+            let score = 0;
+            Object.keys(checks).forEach(k => {
+                const el = document.getElementById(mapIds[k]);
+                if (checks[k]) {
+                    score++;
+                    el.classList.remove('text-slate-600');
+                    el.classList.add('text-emerald-700', 'font-semibold');
+                    el.querySelector('span').className = 'w-2 h-2 rounded-full bg-emerald-500';
+                } else {
+                    el.classList.add('text-slate-600');
+                    el.classList.remove('text-emerald-700', 'font-semibold');
+                    el.querySelector('span').className = 'w-1.5 h-1.5 rounded-full bg-slate-400';
+                }
+            });
+
+            const bar = document.getElementById('pwd-strength-bar');
+            const label = document.getElementById('pwd-strength-label');
+            const btnSave = document.getElementById('btn-save-strong-pwd');
+
+            if (score <= 2) {
+                bar.style.width = '25%'; bar.className = 'h-full bg-red-500 transition-all';
+                label.textContent = 'Débil'; label.className = 'text-red-600';
+                btnSave.disabled = true;
+            } else if (score <= 4) {
+                bar.style.width = '65%'; bar.className = 'h-full bg-amber-500 transition-all';
+                label.textContent = 'Media'; label.className = 'text-amber-600';
+                btnSave.disabled = true;
+            } else {
+                bar.style.width = '100%'; bar.className = 'h-full bg-emerald-500 transition-all';
+                label.textContent = 'Excelente'; label.className = 'text-emerald-600';
+                btnSave.disabled = false;
+            }
+        }
+
+        document.getElementById('force-password-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const p1 = document.getElementById('new-strong-password').value;
+            const p2 = document.getElementById('confirm-strong-password').value;
+            const errEl = document.getElementById('force-pwd-error');
+            errEl.classList.add('hidden');
+
+            if (p1 !== p2) {
+                errEl.textContent = 'Las contraseñas no coinciden.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            const btn = document.getElementById('btn-save-strong-pwd');
+            btn.disabled = true;
+            btn.textContent = 'Actualizando...';
+
+            const { error: authErr } = await sb.auth.updateUser({ password: p1 });
+            if (authErr) {
+                errEl.textContent = 'Error: ' + authErr.message;
+                errEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Guardar Contraseña y Continuar';
+                return;
+            }
+
+            await sb.from('usuarios').update({ requiere_cambio_password: false }).eq('id', perfilActual.id);
+            perfilActual.requiere_cambio_password = false;
+            await iniciarAppOperativa(true);
+        });
+
+        function formatearSegundos(totalSeg) {
+            const h = String(Math.floor(totalSeg / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeg % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeg % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+
+        function getStorageKeyUsuario(userId) {
+            return `gama_timer_${userId}_${TAB_INSTANCE_ID}`;
+        }
+
+        function limpiarEstadosTemporizadoresAjenos(userIdActivo) {
+            const usuarioPrevioId = localStorage.getItem('gama_active_user_id');
+            if (usuarioPrevioId && usuarioPrevioId !== userIdActivo) {
+                Object.keys(localStorage).forEach(k => {
+                    if (k.startsWith(`gama_timer_${usuarioPrevioId}`)) localStorage.removeItem(k);
+                });
+            }
+            localStorage.setItem('gama_active_user_id', userIdActivo);
+        }
+
+        function iniciarOContinuarCronometro(nuevaVistaId, nombrePersonalizado = null, forzarReinicioCero = false) {
+            if (!perfilActual) return;
+            const keyStorage = getStorageKeyUsuario(perfilActual.id);
+            const ahora = Date.now();
+            const etiquetaVista = nombrePersonalizado || NOMBRES_PANTALLAS[nuevaVistaId] || nuevaVistaId;
+
+            if (forzarReinicioCero) localStorage.removeItem(keyStorage);
+
+            const guardado = JSON.parse(localStorage.getItem(keyStorage) || 'null');
+
+            if (!forzarReinicioCero && guardado && guardado.userId === perfilActual.id && guardado.etiqueta === etiquetaVista) {
+                actualizarUIContador(guardado.etiqueta, guardado.inicioTimestamp);
+            } else {
+                if (!forzarReinicioCero && guardado && guardado.userId === perfilActual.id) {
+                    registrarTramoTiempo(guardado.etiqueta, guardado.inicioTimestamp, ahora);
+                }
+                const nuevoEstado = {
+                    userId: perfilActual.id,
+                    vista: nuevaVistaId,
+                    etiqueta: etiquetaVista,
+                    inicioTimestamp: ahora
+                };
+                localStorage.setItem(keyStorage, JSON.stringify(nuevoEstado));
+                actualizarUIContador(etiquetaVista, ahora);
+            }
+
+            if (intervaloReloj) clearInterval(intervaloReloj);
+            intervaloReloj = setInterval(() => {
+                if (!perfilActual) return;
+                const estadoActual = JSON.parse(localStorage.getItem(getStorageKeyUsuario(perfilActual.id)) || 'null');
+                if (estadoActual && estadoActual.userId === perfilActual.id) {
+                    const segTranscurridos = Math.max(0, Math.floor((Date.now() - estadoActual.inicioTimestamp) / 1000));
+                    document.getElementById('timer-reloj-display').textContent = formatearSegundos(segTranscurridos);
+                }
+            }, 1000);
+        }
+
+        function actualizarUIContador(etiqueta, inicioTimestamp) {
+            document.getElementById('timer-pantalla-nombre').textContent = etiqueta;
+            const segTranscurridos = Math.max(0, Math.floor((Date.now() - inicioTimestamp) / 1000));
+            document.getElementById('timer-reloj-display').textContent = formatearSegundos(segTranscurridos);
+        }
+
+        async function registrarTramoTiempo(nombrePantalla, inicioMs, finMs) {
+            if (!perfilActual) return;
+            const duracionSegundos = Math.max(1, Math.round((finMs - inicioMs) / 1000));
+            const dupInfo = obtenerInfoDuplicadoActual();
+
+            const payload = {
+                usuario_id: perfilActual.id,
+                nombre_usuario: perfilActual.nombre_completo,
+                codigo_empleado: perfilActual.codigo_empleado,
+                rol: perfilActual.rol,
+                vista_pantalla: nombrePantalla,
+                fecha_inicio: new Date(inicioMs).toISOString(),
+                fecha_fin: new Date(finMs).toISOString(),
+                duracion_segundos: duracionSegundos,
+                es_duplicado: dupInfo.esDuplicado,
+                paginas_abiertas_detalle: dupInfo.paginasAbiertas
+            };
+
+            sb.from('tiempos_actividad_pantalla').insert([payload]).then(() => {
+                if (!document.getElementById('tab-tiempos').classList.contains('hidden')) {
+                    cargarTiempos();
+                }
+            });
+
+            if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
+                fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tipo_registro: 'actividad_pantalla', ...payload })
+                }).catch(() => {});
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            poblarCheckboxesQueuesModal();
+
+            poblarSelectorTiposSkills();
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                await cargarPerfilYArrancar(session.user.id, false);
+            } else {
+                mostrarVista('landing-view');
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errEl = document.getElementById('login-error');
+            errEl.classList.add('hidden');
+
+            if (intervaloReloj) clearInterval(intervaloReloj);
+            document.getElementById('timer-reloj-display').textContent = '00:00:00';
+
+            const { data, error } = await sb.auth.signInWithPassword({ email, password });
+            if (error) {
+                errEl.textContent = 'Credenciales inválidas o correo aún pendiente de confirmación.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            await cargarPerfilYArrancar(data.user.id, true);
+        });
+
+        async function cargarPerfilYArrancar(userId, esNuevoLogin = false) {
+            const { data: perfil, error } = await sb.from('usuarios').select('*').eq('id', userId).single();
+            if (error || !perfil) {
+                alert('Tu usuario aún no tiene un perfil asignado en public.usuarios.');
+                return;
+            }
+            if (!perfil.activo) {
+                alert('Tu usuario se encuentra inactivo.');
+                await sb.auth.signOut();
+                return;
+            }
+
+            limpiarEstadosTemporizadoresAjenos(perfil.id);
+            perfilActual = perfil;
+            iniciarDeteccionMultiPestana(perfil.id);
+
+            if (perfilActual.requiere_cambio_password) {
+                mostrarVista('force-password-view');
+                return;
+            }
+
+            await iniciarAppOperativa(esNuevoLogin);
+        }
+
+        async function iniciarAppOperativa(esNuevoLogin = false) {
+            mostrarVista('app-view');
+            document.getElementById('user-name-display').textContent = perfilActual.nombre_completo;
+            document.getElementById('user-site-display').textContent = `Site: ${perfilActual.site || 'General'} · ID: ${perfilActual.codigo_empleado}`;
+            document.getElementById('user-role-badge').textContent = perfilActual.rol;
+
+            configurarDashboardSegunPermisos();
+            renderizarHubCategorias();
+            configurarNavegacionPorRol(esNuevoLogin);
+            await cargarCatalogos();
+            await cargarEvaluaciones();
+            await refrescarTablasTiempos();
+        }
+
+        function esRolAdminOManager() {
+            return ['Admin', 'Administrador', 'Manager', 'Cliente'].includes(perfilActual.rol);
+        }
+
+        function esRolQA() {
+            return perfilActual.rol.startsWith('QA');
+        }
+
+        function esRolSupervisorQA() {
+            return perfilActual.rol === 'Supervisor QA';
+        }
+
+        function esRolSupervisorOTL() {
+            return ['Supervisor', 'Team Lead', 'Team_Lead'].includes(perfilActual.rol);
+        }
+
+        function configurarNavegacionPorRol(esNuevoLogin = false) {
+            const nav = document.getElementById('nav-tabs');
+            nav.innerHTML = '';
+            const r = perfilActual.rol;
+
+            const puedeCrearEval = esRolAdminOManager() || esRolQA() || esRolSupervisorQA();
+            const puedeAdmin = ['Admin', 'Administrador'].includes(r);
+
+            const botones = [
+                { id: 'tab-mis-metricas', label: 'Mis Métricas y Evaluaciones', visible: true },
+                { id: 'tab-ver-evaluaciones', label: 'Ver Evaluaciones', visible: true },
+                { id: 'tab-nueva-eval', label: '+ Nueva Evaluación', visible: puedeCrearEval },
+                { id: 'tab-admin', label: 'Administración (Skills y Usuarios)', visible: puedeAdmin },
+                { id: 'tab-tiempos', label: 'Control de Tiempos', visible: true }
+            ];
+
+            botones.forEach(btn => {
+                if (btn.visible) {
+                    const b = document.createElement('button');
+                    b.id = `btn-nav-${btn.id}`;
+                    b.className = 'nav-tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-white border border-slate-200 hover:bg-blue-50 text-slate-700';
+                    b.textContent = btn.label;
+                    b.onclick = () => mostrarTab(btn.id, false);
+                    nav.appendChild(b);
+                }
+            });
+
+            if (esNuevoLogin) {
+                mostrarTab('tab-mis-metricas', true);
+            } else {
+                const guardado = JSON.parse(localStorage.getItem(getStorageKeyUsuario(perfilActual.id)) || 'null');
+                const tabInicial = (guardado && guardado.userId === perfilActual.id && document.getElementById(guardado.vista))
+                    ? guardado.vista
+                    : 'tab-mis-metricas';
+                mostrarTab(tabInicial, false);
+            }
+        }
+
+        function mostrarTab(tabId, forzarReinicioCero = false) {
+            tabActualId = tabId;
+            ['tab-mis-metricas', 'tab-ver-evaluaciones', 'tab-nueva-eval', 'tab-admin', 'tab-tiempos'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                btn.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
+            });
+            const activeBtn = document.getElementById(`btn-nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+            }
+
+            if (tabId === 'tab-nueva-eval') volverAlHubCategorias(false);
+            iniciarOContinuarCronometro(tabId, null, forzarReinicioCero);
+        }
+
+        function configurarDashboardSegunPermisos() {
+            const boxTipo = document.getElementById('box-selector-tipo-dashboard');
+            const boxIndiv = document.getElementById('box-selector-individuo-dashboard');
+            const selTipo = document.getElementById('select-tipo-dashboard');
+
+            boxTipo.classList.add('hidden');
+            boxIndiv.classList.add('hidden');
+
+            if (esRolAdminOManager()) {
+                boxTipo.classList.remove('hidden');
+                boxIndiv.classList.remove('hidden');
+                selTipo.value = 'agentes';
+            } else if (esRolSupervisorQA()) {
+                selTipo.value = 'qa';
+                boxIndiv.classList.remove('hidden');
+            } else if (esRolSupervisorOTL()) {
+                selTipo.value = 'agentes';
+                boxIndiv.classList.remove('hidden');
+            } else if (esRolQA()) {
+                selTipo.value = 'qa';
+            } else {
+                selTipo.value = 'agentes';
+            }
+
+            poblarSelectorIndividuosDashboard();
+            renderizarDashboardDinamico();
+        }
+
+        function cambiarModoDashboard() {
+            poblarSelectorIndividuosDashboard();
+            renderizarDashboardDinamico();
+        }
+
+        function poblarSelectorIndividuosDashboard() {
+            const modo = document.getElementById('select-tipo-dashboard').value;
+            const selIndiv = document.getElementById('select-individuo-dashboard');
+            selIndiv.innerHTML = `<option value="ALL">Vista Global / Consolidado Equipo</option>`;
+
+            if (modo === 'agentes') {
+                let agentesLista = ROSTER_DATA_PRUEBA;
+                if (['Team Lead', 'Team_Lead'].includes(perfilActual.rol)) {
+                    const eq = ROSTER_DATA_PRUEBA.filter(a => a.supervisor.toLowerCase() === perfilActual.nombre_completo.toLowerCase());
+                    if (eq.length > 0) agentesLista = eq;
+                }
+                agentesLista.forEach(ag => {
+                    selIndiv.innerHTML += `<option value="${ag.codigo}">${ag.nombre} (${ag.codigo} · ${ag.campana})</option>`;
+                });
+            } else {
+                const qasUnicos = [...new Map(DATA_QA_DASHBOARD.map(item => [item.codigo, item])).values()];
+                qasUnicos.forEach(q => {
+                    selIndiv.innerHTML += `<option value="${q.codigo}">${q.qa} (${q.codigo})</option>`;
+                });
+            }
+        }
+
+        function renderizarDashboardDinamico() {
+            const modo = document.getElementById('select-tipo-dashboard').value;
+            const filtroIndiv = document.getElementById('select-individuo-dashboard').value;
+            const r = perfilActual.rol;
+
+            if (modo === 'agentes') {
+                document.getElementById('titulo-dashboard-dinamico').textContent = 'Panel de Rendimiento Operativo · Agentes';
+                let registros = DATA_OPERACIONES_DASHBOARD;
+
+                if (r === 'Agente') {
+                    const propios = registros.filter(x => x.codigo === perfilActual.codigo_empleado || x.agente.toLowerCase() === perfilActual.nombre_completo.toLowerCase());
+                    registros = propios.length > 0 ? propios : registros.filter(x => x.codigo === 'EMP-1001');
+                } else if (['Team Lead', 'Team_Lead'].includes(r)) {
+                    const eq = registros.filter(x => x.supervisor.toLowerCase() === perfilActual.nombre_completo.toLowerCase());
+                    if (eq.length > 0) registros = eq;
+                    if (filtroIndiv !== 'ALL') registros = registros.filter(x => x.codigo === filtroIndiv);
+                } else {
+                    if (filtroIndiv !== 'ALL') registros = registros.filter(x => x.codigo === filtroIndiv);
+                }
+
+                const ref = registros[0] || ROSTER_DATA_PRUEBA[0];
+                const esIndividual = (r === 'Agente' || filtroIndiv !== 'ALL');
+                document.getElementById('meta-dash-nombre').textContent = esIndividual ? ref.agente : 'Consolidado Global / Equipo';
+                document.getElementById('meta-dash-codigo').textContent = esIndividual ? ref.codigo : `${registros.length} Evaluaciones`;
+                document.getElementById('meta-dash-supervisor').textContent = esIndividual ? ref.supervisor : 'Todos los Equipos';
+                document.getElementById('meta-dash-campana').textContent = esIndividual ? ref.campana : 'Multicampaña';
+
+                const ahtProm = registros.length ? Math.round(registros.reduce((s, x) => s + x.aht, 0) / registros.length) : 0;
+                const calProm = registros.length ? (registros.reduce((s, x) => s + x.puntaje, 0) / registros.length) : 0;
+                const fallas = registros.filter(x => x.fallaCritica).length;
+                const tasaConf = registros.length ? (registros.filter(x => x.confirmacion === 'Confirmada').length / registros.length) * 100 : 0;
+
+                document.getElementById('kpi-label-1').textContent = 'AHT Promedio (Seg)';
+                document.getElementById('kpi-val-1').textContent = `${ahtProm}s`;
+                document.getElementById('kpi-label-2').textContent = 'Calidad QA Promedio';
+                document.getElementById('kpi-val-2').textContent = `${calProm.toFixed(1)}%`;
+                document.getElementById('kpi-label-3').textContent = 'Fallas Críticas Totales';
+                document.getElementById('kpi-val-3').textContent = fallas;
+                document.getElementById('kpi-label-4').textContent = 'Tasa de Confirmación QA';
+                document.getElementById('kpi-val-4').textContent = `${tasaConf.toFixed(0)}%`;
+
+                document.getElementById('titulo-tabla-dashboard').textContent = 'Evaluaciones Operativas (Dashboard Agentes)';
+                document.getElementById('thead-dashboard-dinamico').innerHTML = `
+                    <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b border-slate-200">
+                        <th class="py-3 px-4">ID Eval</th>
+                        <th class="py-3 px-4">Agente</th>
+                        <th class="py-3 px-4">Campaña</th>
+                        <th class="py-3 px-4">Fecha</th>
+                        <th class="py-3 px-4">AHT</th>
+                        <th class="py-3 px-4">Puntaje QA</th>
+                        <th class="py-3 px-4">Falla Crítica</th>
+                        <th class="py-3 px-4">Confirmación</th>
+                        <th class="py-3 px-4">Analista QA</th>
+                    </tr>`;
+
+                document.getElementById('tbody-dashboard-dinamico').innerHTML = registros.map(row => `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-4 font-mono font-bold text-blue-700">${row.id}</td>
+                        <td class="py-2.5 px-4 font-medium">${row.agente} <span class="text-xs text-slate-400">(${row.codigo})</span></td>
+                        <td class="py-2.5 px-4 text-xs">${row.campana}</td>
+                        <td class="py-2.5 px-4 text-xs text-slate-500">${row.fecha}</td>
+                        <td class="py-2.5 px-4 font-mono text-xs">${row.aht}s</td>
+                        <td class="py-2.5 px-4 font-bold ${row.puntaje >= 90 ? 'text-emerald-600' : 'text-amber-600'}">${row.puntaje.toFixed(1)}%</td>
+                        <td class="py-2.5 px-4"><span class="text-xs px-2 py-0.5 rounded font-bold ${row.fallaCritica ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">${row.fallaCritica ? 'Sí' : 'No'}</span></td>
+                        <td class="py-2.5 px-4"><span class="text-xs px-2 py-0.5 rounded-full font-semibold ${row.confirmacion === 'Confirmada' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">${row.confirmacion}</span></td>
+                        <td class="py-2.5 px-4 text-xs text-slate-600">${row.qa}</td>
+                    </tr>`).join('');
+
+            } else {
+                document.getElementById('titulo-dashboard-dinamico').textContent = 'Panel de Gestión de Calidad · Analistas QA';
+                let registrosQA = DATA_QA_DASHBOARD;
+
+                if (esRolQA()) {
+                    const propios = registrosQA.filter(x => x.codigo === perfilActual.codigo_empleado || x.qa.toLowerCase() === perfilActual.nombre_completo.toLowerCase());
+                    registrosQA = propios.length > 0 ? propios : registrosQA.filter(x => x.codigo === 'QA-101');
+                } else if (filtroIndiv !== 'ALL') {
+                    registrosQA = registrosQA.filter(x => x.codigo === filtroIndiv);
+                }
+
+                const refQA = registrosQA[0] || DATA_QA_DASHBOARD[0];
+                const esIndividualQA = (esRolQA() || filtroIndiv !== 'ALL');
+                document.getElementById('meta-dash-nombre').textContent = esIndividualQA ? refQA.qa : 'Consolidado Equipo QA';
+                document.getElementById('meta-dash-codigo').textContent = esIndividualQA ? refQA.codigo : `${registrosQA.length} Periodos`;
+                document.getElementById('meta-dash-supervisor').textContent = esIndividualQA ? refQA.supervisorQA : 'Supervisión QA Global';
+                document.getElementById('meta-dash-campana').textContent = 'Consolidado Mensual';
+
+                const calRecProm = registrosQA.length ? (registrosQA.reduce((s, x) => s + x.calidadRecibida, 0) / registrosQA.length) : 0;
+                const evalHoraProm = registrosQA.length ? (registrosQA.reduce((s, x) => s + x.evalHora, 0) / registrosQA.length) : 0;
+                const erroresTot = registrosQA.reduce((s, x) => s + x.errores, 0);
+                const tasaErrorProm = registrosQA.length ? (registrosQA.reduce((s, x) => s + x.tasaError, 0) / registrosQA.length) : 0;
+
+                document.getElementById('kpi-label-1').textContent = 'Auditorías Recibidas (Calidad)';
+                document.getElementById('kpi-val-1').textContent = `${calRecProm.toFixed(1)}%`;
+                document.getElementById('kpi-label-2').textContent = 'Evaluaciones por Hora';
+                document.getElementById('kpi-val-2').textContent = evalHoraProm.toFixed(2);
+                document.getElementById('kpi-label-3').textContent = 'Errores de Analista';
+                document.getElementById('kpi-val-3').textContent = erroresTot;
+                document.getElementById('kpi-label-4').textContent = 'Tasa de Error Analista';
+                document.getElementById('kpi-val-4').textContent = `${tasaErrorProm.toFixed(1)}%`;
+
+                document.getElementById('titulo-tabla-dashboard').textContent = 'Productividad y Calibración QA (Dashboard QA)';
+                document.getElementById('thead-dashboard-dinamico').innerHTML = `
+                    <tr class="bg-slate-50 text-slate-600 text-xs uppercase border-b border-slate-200">
+                        <th class="py-3 px-4">Registro</th>
+                        <th class="py-3 px-4">Analista QA</th>
+                        <th class="py-3 px-4">Periodo</th>
+                        <th class="py-3 px-4">Asignadas / Realizadas</th>
+                        <th class="py-3 px-4">Eval / Hora</th>
+                        <th class="py-3 px-4">Errores</th>
+                        <th class="py-3 px-4">Cumplimiento Meta</th>
+                        <th class="py-3 px-4">% Calidad Recibida</th>
+                    </tr>`;
+
+                document.getElementById('tbody-dashboard-dinamico').innerHTML = registrosQA.map(row => `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-4 font-mono font-bold text-blue-700">${row.id}</td>
+                        <td class="py-2.5 px-4 font-medium">${row.qa} <span class="text-xs text-slate-400">(${row.codigo})</span></td>
+                        <td class="py-2.5 px-4 text-xs">${row.periodo}</td>
+                        <td class="py-2.5 px-4 text-xs font-semibold">${row.asignadas} / <span class="text-blue-700">${row.realizadas}</span></td>
+                        <td class="py-2.5 px-4 font-mono text-xs">${row.evalHora.toFixed(2)}</td>
+                        <td class="py-2.5 px-4 font-bold ${row.errores === 0 ? 'text-emerald-600' : 'text-amber-600'}">${row.errores}</td>
+                        <td class="py-2.5 px-4 font-bold ${row.cumplimiento >= 100 ? 'text-emerald-600' : 'text-amber-600'}">${row.cumplimiento.toFixed(1)}%</td>
+                        <td class="py-2.5 px-4 font-bold text-blue-700">${row.calidadRecibida.toFixed(1)}%</td>
+                    </tr>`).join('');
+            }
+        }
+
+        function abrirModalTiempoMuerto() {
+            document.getElementById('form-tiempo-muerto').reset();
+            document.getElementById('modal-tiempo-muerto').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function cerrarModalTiempoMuerto() {
+            document.getElementById('modal-tiempo-muerto').classList.add('hidden');
+        }
+
+        function alternarVistaTiempoMuerto(forzarMostrar = null) {
+            const vAct = document.getElementById('vista-tabla-actividad-pantallas');
+            const vTM = document.getElementById('vista-tabla-tiempo-muerto');
+            const mostrarTM = (forzarMostrar !== null) ? forzarMostrar : vTM.classList.contains('hidden');
+
+            vAct.classList.toggle('hidden', mostrarTM);
+            vTM.classList.toggle('hidden', !mostrarTM);
+            if (mostrarTM) cargarRegistroTiempoMuerto();
+        }
+
+        document.getElementById('form-tiempo-muerto').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const razon = document.getElementById('tm-razon-select').value;
+            const comentarios = document.getElementById('tm-comentarios').value.trim();
+
+            if (!razon || !comentarios) {
+                alert('Debes seleccionar una razón y escribir un comentario obligatorio.');
+                return;
+            }
+
+            const btn = document.getElementById('btn-guardar-tiempo-muerto');
+            btn.disabled = true;
+            btn.textContent = 'Guardando...';
+
+            const payloadTM = {
+                usuario_id: perfilActual.id,
+                codigo_empleado: perfilActual.codigo_empleado,
+                nombre_usuario: perfilActual.nombre_completo,
+                rol: perfilActual.rol,
+                razon: razon,
+                comentarios: comentarios
+            };
+
+            const { error } = await sb.from('tiempos_muertos').insert([payloadTM]);
+
+            if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
+                fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tipo_registro: 'tiempo_muerto', ...payloadTM })
+                }).catch(() => {});
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar';
+            if (window.lucide) lucide.createIcons();
+
+            if (error) {
+                alert('Error al guardar tiempo muerto: ' + error.message);
+                return;
+            }
+
+            cerrarModalTiempoMuerto();
+            alert('Tiempo muerto registrado y exportado a Google Sheets.');
+            alternarVistaTiempoMuerto(true);
+        });
+
+
+        async function cargarRegistroTiempoMuerto() {
+            let query = sb.from('tiempos_muertos').select('*');
+            if (!esRolAdminOManager() && !esRolSupervisorQA() && !esRolSupervisorOTL()) {
+                query = query.eq('usuario_id', perfilActual.id);
+            }
+            const { data } = await query.order('fecha_registro', { ascending: false }).limit(100);
+
+            const tbody = document.getElementById('tabla-tiempo-muerto-body');
+            if (!tbody) return;
+            const lista = data || [];
+            if (lista.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-400 text-xs">No hay registros de tiempo muerto disponibles para tu usuario.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = lista.map(tm => `
+                <tr class="hover:bg-slate-50">
+                    <td class="py-2.5 px-4 text-xs text-slate-500">${new Date(tm.fecha_registro).toLocaleString()}</td>
+                    <td class="py-2.5 px-4 font-medium">${tm.nombre_usuario} <span class="text-xs text-slate-400">(${tm.codigo_empleado})</span></td>
+                    <td class="py-2.5 px-4"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded font-semibold">${tm.rol}</span></td>
+                    <td class="py-2.5 px-4"><span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-bold">${tm.razon}</span></td>
+                    <td class="py-2.5 px-4 text-xs text-slate-700 whitespace-pre-line">${tm.comentarios}</td>
+                </tr>`).join('');
+        }
+
+        async function refrescarTablasTiempos() {
+            await cargarTiempos();
+            await cargarRegistroTiempoMuerto();
+        }
+
+
+        async function cargarTiempos() {
+            let query = sb.from('tiempos_actividad_pantalla').select('*');
+            if (!esRolAdminOManager() && !esRolSupervisorQA() && !esRolSupervisorOTL()) {
+                query = query.eq('usuario_id', perfilActual.id);
+            }
+            const { data } = await query.order('fecha_inicio', { ascending: false }).limit(50);
+
+            const tbody = document.getElementById('tabla-tiempos-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            (data || []).forEach(t => {
+                const dupBadge = t.es_duplicado
+                    ? `<span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Sí</span> <span class="text-[11px] text-slate-500 block mt-0.5">${t.paginas_abiertas_detalle || ''}</span>`
+                    : `<span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">No</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-4 font-medium">${t.nombre_usuario} <span class="text-xs text-slate-400">(${t.codigo_empleado})</span></td>
+                        <td class="py-2.5 px-4"><span class="text-xs bg-slate-100 px-2 py-0.5 rounded font-semibold">${t.rol}</span></td>
+                        <td class="py-2.5 px-4 font-semibold text-blue-700">${t.vista_pantalla}</td>
+                        <td class="py-2.5 px-4">${dupBadge}</td>
+                        <td class="py-2.5 px-4 text-xs text-slate-500">${new Date(t.fecha_inicio).toLocaleTimeString()}</td>
+                        <td class="py-2.5 px-4 text-xs text-slate-500">${new Date(t.fecha_fin).toLocaleTimeString()}</td>
+                        <td class="py-2.5 px-4 font-mono font-bold text-emerald-700">${formatearSegundos(t.duracion_segundos)}</td>
+                    </tr>`;
+            });
+        }
+
+        function tienePermisoSubcategoriaQueue(canal, subcategoria) {
+            const r = perfilActual?.rol || '';
+            if (esRolAdminOManager() || esRolSupervisorQA() || r === 'QA Nivel 12') return true;
+
+            const permitidasNivel = PERMISOS_SUBCATEGORIAS_POR_ROL[r];
+            if (permitidasNivel) {
+                return permitidasNivel.includes('ALL') || permitidasNivel.includes(`${canal}::${subcategoria}`);
+            }
+
+            const autorizadas = Array.isArray(perfilActual?.queues_autorizadas) ? perfilActual.queues_autorizadas : [];
+            return autorizadas.includes(canal);
+        }
+
+        function renderizarHubCategorias() {
+            const grid = document.getElementById('grid-categorias-cards');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const badgeNivel = document.getElementById('badge-nivel-qa-queues');
+            if (badgeNivel && perfilActual) badgeNivel.textContent = `Perfil Activo: ${perfilActual.rol}`;
+
+            QUEUES_EVALUACION.forEach(cat => {
+                let algunaHabilitada = false;
+                const linksHtml = cat.subcategorias.map(sub => {
+                    const esTL = sub.includes('TL');
+                    const habilitada = tienePermisoSubcategoriaQueue(cat.canal, sub);
+                    if (habilitada) algunaHabilitada = true;
+
+                    if (!habilitada) {
+                        return `<div class="w-full px-3 py-2 rounded-lg text-xs font-medium bg-slate-100 text-slate-400 border border-slate-200 flex items-center justify-between cursor-not-allowed">
+                            <span>${sub}</span><i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                        </div>`;
+                    }
+                    return `<button type="button" onclick="iniciarNuevaEvaluacionDesdeQueue('${cat.canal}', '${sub}')"
+                        class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold ${esTL ? 'bg-indigo-50/70 text-indigo-800 border-indigo-200 hover:bg-indigo-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-blue-600'} hover:text-white border transition flex items-center justify-between group">
+                        <span>${sub}</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 group-hover:text-white"></i>
+                    </button>`;
+                }).join('');
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border ${algunaHabilitada ? 'border-slate-200' : 'border-slate-200 opacity-65'} p-5 shadow-sm transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl ${algunaHabilitada ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-400'} flex items-center justify-center">
+                                        <i data-lucide="${cat.icono}" class="w-5 h-5"></i>
+                                    </div>
+                                    <h3 class="font-bold text-slate-900 text-sm">${cat.titulo}</h3>
+                                </div>
+                            </div>
+                            <div class="space-y-2">${linksHtml}</div>
+                        </div>
+                    </div>`;
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function poblarSelectorAgentesRoster() {
+            const selAgente = document.getElementById('eval-agente');
+            if (!selAgente) return;
+            selAgente.innerHTML = `<option value="">Selecciona un agente del Roster...</option>`;
+            ROSTER_DATA_PRUEBA.forEach(ag => {
+                selAgente.innerHTML += `<option value="${ag.codigo}">${ag.nombre} (${ag.codigo} · ${ag.skill} · ${ag.campana})</option>`;
+            });
+        }
+
+        function actualizarDatosAgenteRoster() {
+            const cod = document.getElementById('eval-agente').value;
+            const ag = ROSTER_DATA_PRUEBA.find(x => x.codigo === cod);
+            if (!ag) {
+                document.getElementById('eval-agente-info').value = '';
+                document.getElementById('eval-lideres-info').value = '';
+                return;
+            }
+            document.getElementById('eval-agente-info').value = `${ag.codigo} | ${ag.skill} (${ag.rol}) | Site: ${ag.site}`;
+            document.getElementById('eval-lideres-info').value = `Sup: ${ag.supervisor} | Mgr: ${ag.manager} | Client: ${ag.client}`;
+
+            const selSkill = document.getElementById('eval-skill');
+            for (let i = 0; i < selSkill.options.length; i++) {
+                if (selSkill.options[i].text.toLowerCase().includes(ag.campana.toLowerCase())) {
+                    selSkill.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        function crearFilaItemEvaluacionID(ev, colorClase) {
+            const evJson = JSON.stringify(ev).replace(/'/g, "&#39;");
+            return `
+                <div class="flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg">
+                    <button type="button" onclick='abrirPopUpSoloLectura(${evJson})' class="font-mono font-bold ${colorClase} hover:underline text-sm">
+                        #${ev.numero_evaluacion}
+                    </button>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick='abrirEvaluacionExistente(${evJson})' title="Editar" class="p-1.5 rounded-md text-slate-600 hover:text-blue-600 hover:bg-blue-50">
+                            <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button type="button" onclick='abrirModalEliminar(${evJson})' title="Eliminar" class="p-1.5 rounded-md text-slate-600 hover:text-red-600 hover:bg-red-50">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>`;
+        }
+
+        function actualizarPanelConteoNuevaEvaluacion() {
+            const propias = evaluacionesCache.filter(ev => esRolAdminOManager() ? true : ev.qa_id === perfilActual.id);
+            const finalizadas = propias.filter(ev => ev.estado === 'finalizada');
+            const borradores = propias.filter(ev => ev.estado === 'borrador');
+            const iniciadas = propias.filter(ev => ev.estado === 'iniciada');
+
+            document.getElementById('hub-count-finalizadas').textContent = finalizadas.length;
+            document.getElementById('hub-count-borradores').textContent = borradores.length;
+            document.getElementById('hub-count-iniciadas').textContent = iniciadas.length;
+
+            document.getElementById('hub-lista-finalizadas').innerHTML = finalizadas.length
+                ? finalizadas.map(ev => crearFilaItemEvaluacionID(ev, 'text-emerald-700')).join('')
+                : `<p class="text-slate-400 italic py-2">Sin registros.</p>`;
+
+            document.getElementById('hub-lista-borradores').innerHTML = borradores.length
+                ? borradores.map(ev => crearFilaItemEvaluacionID(ev, 'text-amber-700')).join('')
+                : `<p class="text-slate-400 italic py-2">Sin borradores.</p>`;
+
+            document.getElementById('hub-lista-iniciadas').innerHTML = iniciadas.length
+                ? iniciadas.map(ev => crearFilaItemEvaluacionID(ev, 'text-rose-700')).join('')
+                : `<p class="text-slate-400 italic py-2">Sin iniciadas.</p>`;
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        async function iniciarNuevaEvaluacionDesdeQueue(canal, subtipo) {
+            const ahoraIso = new Date().toISOString();
+            const defaultFormId = rubricasCache.length > 0 ? rubricasCache[0].id : null;
+
+            const { data: nuevaEval, error } = await sb.from('evaluaciones').insert([{
+                qa_id: perfilActual.id,
+                canal: canal,
+                subtipo_evaluacion: subtipo,
+                es_calibracion: (canal === 'Auditorias'),
+                estado: 'iniciada',
+                formulario_id: defaultFormId,
+                fecha_creacion_inicio: ahoraIso,
+                selecciones_criterios: [],
+                puntaje_ponderado: 100,
+                falla_critica: false,
+                calificacion_final: 100
+            }]).select().single();
+
+            if (error || !nuevaEval) {
+                alert('Error al inicializar evaluación: ' + (error?.message || ''));
+                return;
+            }
+
+            await cargarEvaluaciones();
+            abrirEvaluacionExistente(nuevaEval);
+        }
+
+        function abrirEvaluacionExistente(evalObj) {
+            document.getElementById('hub-categorias-eval').classList.add('hidden');
+            document.getElementById('contenedor-form-eval').classList.remove('hidden');
+
+            document.getElementById('eval-form').reset();
+            poblarSelectorAgentesRoster();
+
+            document.getElementById('eval-id-registro').value = evalObj.id;
+            document.getElementById('eval-numero-registro').value = evalObj.numero_evaluacion;
+            document.getElementById('eval-canal-oculto').value = evalObj.canal;
+            document.getElementById('eval-subtipo-oculto').value = evalObj.subtipo_evaluacion || 'Crear nueva evaluación';
+
+            const fechaInicioIso = evalObj.fecha_creacion_inicio || new Date().toISOString();
+            document.getElementById('eval-fecha-inicio-iso').value = fechaInicioIso;
+            document.getElementById('display-fecha-inicio-creacion').textContent = new Date(fechaInicioIso).toLocaleString();
+
+            document.getElementById('form-numero-eval-badge').textContent = `#${evalObj.numero_evaluacion}`;
+            document.getElementById('form-badge-categoria').textContent = `Queue: ${evalObj.canal}`;
+            document.getElementById('form-titulo-subcategoria').textContent = evalObj.subtipo_evaluacion || 'Evaluación';
+
+            const badgeEstado = document.getElementById('badge-estado-form');
+            if (evalObj.estado === 'finalizada') {
+                badgeEstado.textContent = 'Guardado Final';
+                badgeEstado.className = 'bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full';
+            } else if (evalObj.estado === 'borrador') {
+                badgeEstado.textContent = 'Guardada (Borrador)';
+                badgeEstado.className = 'bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full';
+            } else {
+                badgeEstado.textContent = 'Iniciada';
+                badgeEstado.className = 'bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full';
+            }
+
+            const mostrarCalib = (evalObj.canal === 'Auditorias' || esRolAdminOManager());
+            document.getElementById('box-calibracion').classList.toggle('hidden', !mostrarCalib);
+            document.getElementById('eval-es-calibracion').checked = Boolean(evalObj.es_calibracion);
+
+            if (evalObj.evidencia_url_o_texto && evalObj.evidencia_url_o_texto.startsWith('ROSTER:')) {
+                const codRoster = evalObj.evidencia_url_o_texto.split('|')[0].replace('ROSTER:', '').trim();
+                document.getElementById('eval-agente').value = codRoster;
+                actualizarDatosAgenteRoster();
+            }
+
+            if (evalObj.skill_id) document.getElementById('eval-skill').value = evalObj.skill_id;
+            if (evalObj.formulario_id) document.getElementById('eval-form-select').value = evalObj.formulario_id;
+            if (evalObj.id_interaccion_audio) document.getElementById('eval-id-audio').value = evalObj.id_interaccion_audio;
+
+            if (evalObj.fecha_interaccion) {
+                const dt = new Date(evalObj.fecha_interaccion);
+                dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+                document.getElementById('eval-fecha-interaccion').value = dt.toISOString().slice(0, 16);
+            }
+            document.getElementById('eval-causa-raiz').value = evalObj.hallazgo_causa_raiz || '';
+            document.getElementById('eval-feedback').value = evalObj.feedback_texto || '';
+
+            renderizarRubrica(evalObj.selecciones_criterios || []);
+            iniciarOContinuarCronometro('tab-nueva-eval', `Editando Eval #${evalObj.numero_evaluacion}`);
+            window.scrollTo(0, 0);
+        }
+
+        function volverAlHubCategorias(reiniciarTimer = true) {
+            document.getElementById('contenedor-form-eval').classList.add('hidden');
+            document.getElementById('hub-categorias-eval').classList.remove('hidden');
+            actualizarPanelConteoNuevaEvaluacion();
+            if (reiniciarTimer && perfilActual) {
+                iniciarOContinuarCronometro('tab-nueva-eval', 'Nueva Evaluación');
+            }
+        }
+
+        function renderizarRubrica(seleccionesPrevias = []) {
+            const formId = document.getElementById('eval-form-select').value;
+            const formObj = rubricasCache.find(f => f.id === formId);
+            const container = document.getElementById('rubrica-items-container');
+            container.innerHTML = '';
+            if (!formObj) return;
+
+            criterioActualItems = formObj.criterios_json;
+            criterioActualItems.forEach((item, idx) => {
+                const esCritico = item.tipo === 'Falla Crítica';
+                const previo = seleccionesPrevias.find(p => p.id === item.id);
+                const resultadoVal = previo ? previo.resultado : 'cumple';
+                const comentarioVal = previo ? (previo.comentario || '') : '';
+
+                container.innerHTML += `
+                    <div class="p-4 rounded-xl border ${esCritico ? 'border-amber-300 bg-amber-50/40' : 'border-slate-200 bg-slate-50/50'} space-y-3">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded ${esCritico ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}">
+                                    ${esCritico ? 'Falla Crítica (Auto-Fail)' : `Peso: ${item.peso} pts`}
+                                </span>
+                                <p class="font-semibold text-slate-900 mt-1.5">${item.id} · ${item.descripcion}</p>
+                            </div>
+                            <select data-idx="${idx}" onchange="recalcularPuntaje()" class="criterio-select px-3.5 py-2 rounded-lg border border-slate-300 text-sm font-bold bg-white">
+                                <option value="cumple" ${resultadoVal === 'cumple' ? 'selected' : ''}>Cumple</option>
+                                <option value="no_cumple" ${resultadoVal === 'no_cumple' ? 'selected' : ''}>No Cumple</option>
+                            </select>
+                        </div>
+                        <div>
+                            <textarea data-idx="${idx}" rows="1" oninput="autoExpandirTextarea(this)" 
+                                placeholder="Retroalimentación para ${item.id}..."
+                                class="criterio-comentario w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm resize-none overflow-hidden focus:ring-2 focus:ring-blue-500 outline-none">${comentarioVal}</textarea>
+                        </div>
+                    </div>`;
+            });
+
+            document.querySelectorAll('.criterio-comentario').forEach(tx => autoExpandirTextarea(tx));
+            recalcularPuntaje();
+        }
+
+        function recalcularPuntaje() {
+            let puntosGanados = 0;
+            let puntosTotales = 0;
+            let hayAutoFail = false;
+
+            document.querySelectorAll('.criterio-select').forEach(sel => {
+                const item = criterioActualItems[sel.dataset.idx];
+                const cumple = sel.value === 'cumple';
+                if (item.tipo === 'Falla Crítica') {
+                    if (!cumple) hayAutoFail = true;
+                } else {
+                    puntosTotales += Number(item.peso);
+                    if (cumple) puntosGanados += Number(item.peso);
+                }
+            });
+
+            const ponderado = puntosTotales > 0 ? (puntosGanados / puntosTotales) * 100 : 100;
+            const final = hayAutoFail ? 0 : ponderado;
+
+            document.getElementById('nota-preview').textContent = final.toFixed(2);
+            document.getElementById('badge-autofail').classList.toggle('hidden', !hayAutoFail);
+            return { ponderado, hayAutoFail, final };
+        }
+
+        async function procesarGuardadoEvaluacion(estadoDestino) {
+            const rosterCod = document.getElementById('eval-agente').value || null;
+            const agRosterObj = ROSTER_DATA_PRUEBA.find(x => x.codigo === rosterCod);
+
+            const rawSkillId = document.getElementById('eval-skill').value || null;
+            const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+            const skillId = (rawSkillId && uuidRegex.test(rawSkillId)) ? rawSkillId : null;
+            const formId = document.getElementById('eval-form-select').value || null;
+            const idAudio = document.getElementById('eval-id-audio').value.trim() || null;
+            const fechaInteraccionVal = document.getElementById('eval-fecha-interaccion').value;
+            const feedbackGeneral = document.getElementById('eval-feedback').value.trim();
+
+            if (estadoDestino === 'finalizada') {
+                if (!rosterCod || !skillId || !idAudio || !fechaInteraccionVal || !feedbackGeneral) {
+                    alert('Para ejecutar el Guardado Final completa: Agente (Roster), Campaña/Skill, ID Interacción, Fecha/Hora Interacción y Resumen Ejecutivo.');
+                    return;
+                }
+            }
+
+            const btnBorrador = document.getElementById('btn-guardar-borrador');
+            const btnFinal = document.getElementById('btn-guardado-final');
+            btnBorrador.disabled = true;
+            btnFinal.disabled = true;
+
+            const calc = recalcularPuntaje();
+            const selecciones = [];
+            let defectos = 0;
+            const comentariosEls = document.querySelectorAll('.criterio-comentario');
+
+            document.querySelectorAll('.criterio-select').forEach((sel, i) => {
+                const item = criterioActualItems[sel.dataset.idx];
+                const comentario = comentariosEls[i] ? comentariosEls[i].value : '';
+                if (sel.value === 'no_cumple') defectos++;
+                selecciones.push({
+                    id: item.id,
+                    descripcion: item.descripcion,
+                    resultado: sel.value,
+                    tipo: item.tipo,
+                    peso: item.peso,
+                    comentario: comentario
+                });
+            });
+
+            const evalId = document.getElementById('eval-id-registro').value;
+            const ahoraIso = new Date().toISOString();
+            const rosterMetaStr = agRosterObj
+                ? `ROSTER:${agRosterObj.codigo} | ${agRosterObj.nombre} | Sup: ${agRosterObj.supervisor} | Site: ${agRosterObj.site}`
+                : null;
+
+            const registroEval = {
+                skill_id: skillId,
+                formulario_id: formId,
+                es_calibracion: document.getElementById('eval-es-calibracion').checked,
+                estado: estadoDestino,
+                fecha_interaccion: fechaInteraccionVal ? new Date(fechaInteraccionVal).toISOString() : null,
+                fecha_guardado_final: estadoDestino === 'finalizada' ? ahoraIso : null,
+                id_interaccion_audio: idAudio,
+                evidencia_url_o_texto: rosterMetaStr,
+                selecciones_criterios: selecciones,
+                puntaje_ponderado: calc.ponderado,
+                falla_critica: calc.hayAutoFail,
+                calificacion_final: calc.final,
+                defectos_contados: defectos,
+                oportunidades_defecto: criterioActualItems.length,
+                hallazgo_causa_raiz: document.getElementById('eval-causa-raiz').value || null,
+                feedback_texto: feedbackGeneral || null
+            };
+
+            const { data: evalGuardada, error } = await sb.from('evaluaciones')
+                .update(registroEval)
+                .eq('id', evalId)
+                .select()
+                .single();
+
+            btnBorrador.disabled = false;
+            btnFinal.disabled = false;
+
+            if (error) {
+                alert('Error al guardar: ' + error.message);
+                return;
+            }
+
+            if (estadoDestino === 'borrador') {
+                const badgeEstado = document.getElementById('badge-estado-form');
+                badgeEstado.textContent = 'Guardada (Borrador)';
+                badgeEstado.className = 'bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full';
+                alert(`Evaluación #${evalGuardada.numero_evaluacion} guardada en Borradores.`);
+                await cargarEvaluaciones();
+            } else {
+                exportarEvaluacionExterna(evalGuardada, selecciones, agRosterObj);
+                alert(`¡Guardado Final completado! Evaluación #${evalGuardada.numero_evaluacion} (${evalGuardada.calificacion_final}%).`);
+                await cargarEvaluaciones();
+                volverAlHubCategorias(true);
+            }
+        }
+
+        function exportarEvaluacionExterna(ev, selecciones, agRosterObj) {
+            if (!GOOGLE_SHEETS_EVALUACIONES_WEBHOOK_URL || !GOOGLE_SHEETS_EVALUACIONES_WEBHOOK_URL.startsWith('http')) return;
+            const resumenCriterios = selecciones.map(c => `[${c.id}: ${c.resultado.toUpperCase()} - ${c.comentario || 'Sin nota'}]`).join(' | ');
+
+            const payload = {
+                numero_evaluacion: ev.numero_evaluacion,
+                fecha_interaccion: ev.fecha_interaccion,
+                fecha_creacion_inicio: ev.fecha_creacion_inicio,
+                fecha_guardado_final: ev.fecha_guardado_final,
+                canal: ev.canal,
+                subtipo_evaluacion: ev.subtipo_evaluacion,
+                es_calibracion: ev.es_calibracion,
+                codigo_agente: agRosterObj ? agRosterObj.codigo : 'N/A',
+                nombre_agente: agRosterObj ? agRosterObj.nombre : 'N/A',
+                site_agente: agRosterObj ? agRosterObj.site : 'N/A',
+                nombre_qa: perfilActual.nombre_completo,
+                id_interaccion_audio: ev.id_interaccion_audio,
+                puntaje_ponderado: ev.puntaje_ponderado,
+                falla_critica: ev.falla_critica,
+                calificacion_final: ev.calificacion_final,
+                defectos_contados: ev.defectos_contados,
+                hallazgo_causa_raiz: ev.hallazgo_causa_raiz,
+                feedback_texto: ev.feedback_texto,
+                detalle_criterios_texto: resumenCriterios
+            };
+
+            fetch(GOOGLE_SHEETS_EVALUACIONES_WEBHOOK_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(() => {});
+        }
+
+        function obtenerDatosAgenteDeEvaluacion(ev) {
+            if (ev.evidencia_url_o_texto && ev.evidencia_url_o_texto.startsWith('ROSTER:')) {
+                const partes = ev.evidencia_url_o_texto.split('|').map(s => s.trim());
+                return {
+                    nombre: partes[1] || 'Agente Roster',
+                    site: (partes[3] || '').replace('Site:', '').trim(),
+                    supervisor: (partes[2] || '').replace('Sup:', '').trim()
+                };
+            }
+            return {
+                nombre: ev.agente?.nombre_completo || 'Sin asignar',
+                site: ev.agente?.site || '',
+                supervisor: ''
+            };
+        }
+
+        function construirHtmlFichaEvaluacion(ev) {
+            const agInfo = obtenerDatosAgenteDeEvaluacion(ev);
+            const fCreacion = ev.fecha_creacion_inicio ? new Date(ev.fecha_creacion_inicio).toLocaleString() : new Date(ev.fecha_evaluacion).toLocaleString();
+            const fInteraccion = ev.fecha_interaccion ? new Date(ev.fecha_interaccion).toLocaleString() : 'Pendiente';
+            const fGuardadoFinal = ev.fecha_guardado_final ? new Date(ev.fecha_guardado_final).toLocaleString() : 'Pendiente';
+
+            const itemsHtml = (ev.selecciones_criterios && ev.selecciones_criterios.length > 0)
+                ? ev.selecciones_criterios.map(c => `
+                    <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800">${c.id} - ${c.descripcion}</span>
+                            <span class="font-bold text-xs px-2 py-0.5 rounded ${c.resultado === 'cumple' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                                ${c.resultado === 'cumple' ? 'Cumple' : 'No Cumple'}
+                            </span>
+                        </div>
+                        ${c.comentario ? `<p class="text-xs text-slate-600 italic bg-white p-2 rounded border border-slate-100">"${c.comentario}"</p>` : ''}
+                    </div>`).join('')
+                : `<p class="text-xs text-slate-400 italic">Sin criterios guardados.</p>`;
+
+            return `
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 bg-slate-50 p-3.5 rounded-xl text-xs border border-slate-200">
+                    <div><span class="text-slate-400 block">Colaborador Evaluado:</span><strong class="text-slate-900">${agInfo.nombre}</strong></div>
+                    <div><span class="text-slate-400 block">Evaluador QA:</span><strong class="text-slate-900">${ev.qa?.nombre_completo || perfilActual.nombre_completo}</strong></div>
+                    <div><span class="text-slate-400 block">ID Interacción:</span><strong class="font-mono text-slate-900">${ev.id_interaccion_audio || 'N/A'}</strong></div>
+                    <div><span class="text-slate-400 block">Fecha de Creación:</span><strong class="text-blue-800">${fCreacion}</strong></div>
+                    <div><span class="text-slate-400 block">Fecha Interacción:</span><strong class="text-slate-800">${fInteraccion}</strong></div>
+                    <div><span class="text-slate-400 block">Guardado Final:</span><strong class="text-emerald-700">${fGuardadoFinal}</strong></div>
+                </div>
+                <div class="bg-blue-50 p-3.5 rounded-xl border border-blue-100">
+                    <p class="text-xs font-bold text-blue-800 uppercase mb-1">Resumen Ejecutivo / Feedback</p>
+                    <p class="text-slate-800 whitespace-pre-line text-xs">${ev.feedback_texto || 'Sin comentarios.'}</p>
+                </div>
+                ${ev.hallazgo_causa_raiz ? `<p class="text-xs"><strong>Causa Raíz:</strong> ${ev.hallazgo_causa_raiz}</p>` : ''}
+                <div class="space-y-2"><p class="font-bold text-xs uppercase text-slate-600">Desglose de Criterios:</p>${itemsHtml}</div>
+            `;
+        }
+
+        function abrirPopUpSoloLectura(ev) {
+            evaluacionVistaPopUpActual = ev;
+            document.getElementById('box-enviar-correo-ficha').classList.add('hidden');
+            document.getElementById('input-correo-destino-ficha').value = '';
+
+            document.getElementById('modal-titulo').textContent = `Evaluación #${ev.numero_evaluacion} · Nota: ${Number(ev.calificacion_final).toFixed(1)}%`;
+            document.getElementById('modal-subtitulo').textContent = `Queue: ${ev.canal} (${ev.subtipo_evaluacion || 'Estándar'})`;
+
+            const badge = document.getElementById('modal-estado-badge');
+            if (ev.estado === 'finalizada') {
+                badge.textContent = 'Guardado Final';
+                badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800';
+            } else if (ev.estado === 'borrador') {
+                badge.textContent = 'Borrador';
+                badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800';
+            } else {
+                badge.textContent = 'Iniciada';
+                badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800';
+            }
+
+            document.getElementById('modal-contenido').innerHTML = construirHtmlFichaEvaluacion(ev);
+
+            const footer = document.getElementById('modal-footer');
+            footer.innerHTML = `
+                <button type="button" onclick="mostrarCajaCorreoFicha()" class="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-semibold text-xs flex items-center gap-1.5">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Enviar por Correo Electrónico
+                </button>
+                <div class="flex items-center gap-2">
+                    ${(ev.agente_id === perfilActual.id && !ev.revisado_por_agente && ev.estado === 'finalizada')
+                        ? `<button type="button" onclick="marcarRevisado('${ev.id}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs">Confirmar Revisión</button>`
+                        : ''}
+                    <button type="button" onclick="cerrarModal()" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs">Cerrar</button>
+                </div>
+            `;
+
+            document.getElementById('modal-detalle').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function mostrarCajaCorreoFicha() {
+            const box = document.getElementById('box-enviar-correo-ficha');
+            box.classList.remove('hidden');
+            document.getElementById('input-correo-destino-ficha').focus();
+        }
+
+        async function enviarFichaPorCorreo() {
+            const correoDestino = document.getElementById('input-correo-destino-ficha').value.trim();
+            if (!correoDestino || !correoDestino.includes('@')) {
+                alert('Ingresa un correo electrónico válido.');
+                return;
+            }
+            if (!evaluacionVistaPopUpActual) return;
+
+            const btn = document.getElementById('btn-ejecutar-envio-correo');
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            let imagenFichaBase64 = null;
+            try {
+                const elFicha = document.getElementById('ficha-evaluacion-capturable');
+                const canvas = await html2canvas(elFicha, { scale: 1.2, useCORS: true, backgroundColor: '#ffffff' });
+                imagenFichaBase64 = canvas.toDataURL('image/png');
+            } catch (e) {}
+
+            const agInfo = obtenerDatosAgenteDeEvaluacion(evaluacionVistaPopUpActual);
+            const payload = {
+                tipo_envio: 'ficha_evaluacion',
+                correo_destino: correoDestino,
+                numero_evaluacion: evaluacionVistaPopUpActual.numero_evaluacion,
+                canal: evaluacionVistaPopUpActual.canal,
+                subtipo_evaluacion: evaluacionVistaPopUpActual.subtipo_evaluacion,
+                nombre_agente: agInfo.nombre,
+                nombre_qa: evaluacionVistaPopUpActual.qa?.nombre_completo || perfilActual.nombre_completo,
+                fecha_creacion: new Date(evaluacionVistaPopUpActual.fecha_creacion_inicio || evaluacionVistaPopUpActual.fecha_evaluacion).toLocaleString(),
+                calificacion_final: evaluacionVistaPopUpActual.calificacion_final,
+                feedback_texto: evaluacionVistaPopUpActual.feedback_texto,
+                captura_pantalla_base64: imagenFichaBase64
+            };
+
+            if (AUDIT_DELETE_WEBHOOK_URL && AUDIT_DELETE_WEBHOOK_URL.startsWith('http')) {
+                await fetch(AUDIT_DELETE_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(() => {});
+                alert(`Evaluación #${evaluacionVistaPopUpActual.numero_evaluacion} enviada a ${correoDestino}.`);
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="send" class="w-3.5 h-3.5"></i> Enviar Ahora';
+            document.getElementById('box-enviar-correo-ficha').classList.add('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-detalle').classList.add('hidden');
+        }
+
+        async function marcarRevisado(evalId) {
+            const { error } = await sb.from('evaluaciones').update({ revisado_por_agente: true }).eq('id', evalId);
+            if (!error) {
+                cerrarModal();
+                await cargarEvaluaciones();
+            }
+        }
+
+        function abrirModalEliminar(ev) {
+            iniciarOContinuarCronometro(tabActualId, `Eliminando Eval #${ev.numero_evaluacion}`);
+            contextoBorradoActivo = { ev: ev, inicioBorradoMs: Date.now() };
+
+            document.getElementById('form-eliminar-eval').reset();
+            document.getElementById('del-eval-uuid').value = ev.id;
+            document.getElementById('del-eval-numero-label').textContent = `#${ev.numero_evaluacion}`;
+            document.getElementById('del-box-duplicada').classList.add('hidden');
+            document.getElementById('del-box-manual').classList.add('hidden');
+            document.getElementById('del-error-msg').classList.add('hidden');
+            document.getElementById('modal-eliminar-eval').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function cancelarProcesoEliminacion() {
+            document.getElementById('modal-eliminar-eval').classList.add('hidden');
+            document.getElementById('modal-confirmar-imagen-borrado').classList.add('hidden');
+            contextoBorradoActivo = null;
+            iniciarOContinuarCronometro(tabActualId);
+        }
+
+        function actualizarCamposCondicionalesBorrado() {
+            const motivo = document.getElementById('del-motivo-select').value;
+            document.getElementById('del-box-duplicada').classList.toggle('hidden', motivo !== 'Duplicada');
+            document.getElementById('del-box-manual').classList.toggle('hidden', motivo !== 'Crear Manual');
+            document.getElementById('del-num-duplicada').required = (motivo === 'Duplicada');
+            document.getElementById('del-num-manual').required = (motivo === 'Crear Manual');
+        }
+
+        document.getElementById('form-eliminar-eval').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errEl = document.getElementById('del-error-msg');
+            errEl.classList.add('hidden');
+
+            const uuidEliminar = document.getElementById('del-eval-uuid').value;
+            const motivo = document.getElementById('del-motivo-select').value;
+            const justificacion = document.getElementById('del-justificacion').value.trim();
+            const passwordConfirm = document.getElementById('del-password-confirm').value;
+
+            const evalOriginal = evaluacionesCache.find(item => item.id === uuidEliminar);
+            if (!evalOriginal) return;
+
+            let numReferencia = null;
+            if (motivo === 'Duplicada') {
+                numReferencia = parseInt(document.getElementById('del-num-duplicada').value, 10);
+                if (!numReferencia) { errEl.textContent = 'Ingresa el # de evaluación duplicada.'; errEl.classList.remove('hidden'); return; }
+            }
+
+            if (motivo === 'Crear Manual') {
+                numReferencia = parseInt(document.getElementById('del-num-manual').value, 10);
+                if (!numReferencia) { errEl.textContent = 'Ingresa el # de evaluación manual.'; errEl.classList.remove('hidden'); return; }
+
+                const { data: evalManualCheck } = await sb.from('evaluaciones')
+                    .select('numero_evaluacion, subtipo_evaluacion')
+                    .eq('numero_evaluacion', numReferencia)
+                    .maybeSingle();
+
+                if (!evalManualCheck) {
+                    errEl.textContent = `No se puede eliminar: La evaluación #${numReferencia} no existe.`;
+                    errEl.classList.remove('hidden');
+                    return;
+                }
+                if (!(evalManualCheck.subtipo_evaluacion || '').toLowerCase().includes('manual')) {
+                    errEl.textContent = `No se puede eliminar: La evaluación #${numReferencia} NO pertenece a una Queue Manual.`;
+                    errEl.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            const btn = document.getElementById('btn-preparar-captura-borrado');
+            btn.disabled = true;
+            btn.textContent = 'Verificando...';
+
+            const { error: authCheckErr } = await sbRegistro.auth.signInWithPassword({
+                email: perfilActual.correo,
+                password: passwordConfirm
+            });
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="camera" class="w-4 h-4"></i> Continuar y Capturar Evaluación';
+            if (window.lucide) lucide.createIcons();
+
+            if (authCheckErr) {
+                errEl.textContent = 'Contraseña incorrecta.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            contextoBorradoActivo.motivo = motivo;
+            contextoBorradoActivo.numReferencia = numReferencia;
+            contextoBorradoActivo.justificacion = justificacion;
+
+            document.getElementById('modal-eliminar-eval').classList.add('hidden');
+            const contAislado = document.getElementById('contenedor-captura-aislada-eval');
+            contAislado.innerHTML = `
+                <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700">GAMA Quality Consulting · Evidencia de Evaluación Eliminada</span>
+                        <h3 class="text-lg font-extrabold text-slate-900">Evaluación #${evalOriginal.numero_evaluacion} · Nota: ${Number(evalOriginal.calificacion_final).toFixed(1)}%</h3>
+                    </div>
+                    <span class="bg-red-100 text-red-700 text-xs font-extrabold px-3 py-1 rounded-full">ELIMINADA</span>
+                </div>
+                ${construirHtmlFichaEvaluacion(evalOriginal)}
+            `;
+            document.getElementById('modal-confirmar-imagen-borrado').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        });
+
+        async function ejecutarBorradoDefinitivoConImagen() {
+            if (!contextoBorradoActivo) return;
+            const btn = document.getElementById('btn-ejecutar-borrado-y-cerrar');
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+
+            const evalOriginal = contextoBorradoActivo.ev;
+            const duracionBorradoSeg = Math.max(1, Math.round((Date.now() - contextoBorradoActivo.inicioBorradoMs) / 1000));
+
+            let screenshotEvaluacionBase64 = null;
+            try {
+                const canvas = await html2canvas(document.getElementById('contenedor-captura-aislada-eval'), { scale: 1.2, useCORS: true, backgroundColor: '#ffffff' });
+                screenshotEvaluacionBase64 = canvas.toDataURL('image/png');
+            } catch (scErr) {}
+
+            const payloadAuditoria = {
+                numero_evaluacion: evalOriginal.numero_evaluacion,
+                evaluacion_snapshot: evalOriginal,
+                motivo_borrado: contextoBorradoActivo.motivo,
+                evaluacion_referencia_num: contextoBorradoActivo.numReferencia,
+                justificacion_texto: contextoBorradoActivo.justificacion,
+                eliminado_por: perfilActual.id,
+                eliminado_por_nombre: `${perfilActual.nombre_completo} (${perfilActual.codigo_empleado})`,
+                correo_notificacion: EMAIL_AUDITORIA_BORRADO,
+                tiempo_proceso_borrado_seg: duracionBorradoSeg,
+                captura_pantalla_base64: screenshotEvaluacionBase64
+            };
+
+            await sb.from('auditoria_eliminaciones').insert([payloadAuditoria]);
+
+            if (AUDIT_DELETE_WEBHOOK_URL && AUDIT_DELETE_WEBHOOK_URL.startsWith('http')) {
+                fetch(AUDIT_DELETE_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payloadAuditoria)
+                }).catch(() => {});
+            }
+
+            await sb.from('evaluaciones').delete().eq('id', evalOriginal.id);
+
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4"></i> Sí, Borrar Evaluación y Enviar Imagen';
+            document.getElementById('modal-confirmar-imagen-borrado').classList.add('hidden');
+            contextoBorradoActivo = null;
+            iniciarOContinuarCronometro(tabActualId);
+            alert(`Evaluación #${evalOriginal.numero_evaluacion} eliminada y notificada a ${EMAIL_AUDITORIA_BORRADO}.`);
+            await cargarEvaluaciones();
+        }
+
+        async function cargarEvaluaciones() {
+            const { data: evals, error } = await sb.from('evaluaciones')
+                .select('*, agente:usuarios!evaluaciones_agente_id_fkey(nombre_completo, site, codigo_empleado, supervisor_id), qa:usuarios!evaluaciones_qa_id_fkey(nombre_completo)')
+                .order('numero_evaluacion', { ascending: false });
+
+            if (error) return;
+            evaluacionesCache = evals || [];
+            actualizarPanelConteoNuevaEvaluacion();
+            renderizarTablaGlobal();
+        }
+
+        function renderizarTablaGlobal() {
+            const filtroEstado = document.getElementById('filtro-estado-eval').value;
+            const r = perfilActual.rol;
+
+            const filtradas = evaluacionesCache.filter(ev => {
+                if (ev.es_calibracion && !esRolAdminOManager() && !esRolSupervisorQA()) return false;
+
+                if (r === 'Agente') {
+                    if (ev.agente_id !== perfilActual.id || ev.estado !== 'finalizada') return false;
+                } else if (esRolQA()) {
+                    if (ev.qa_id !== perfilActual.id) return false;
+                } else if (['Team Lead', 'Team_Lead'].includes(r)) {
+                    if (ev.estado !== 'finalizada') return false;
+                } else if (r === 'Supervisor') {
+                    if (ev.estado !== 'finalizada') return false;
+                }
+
+                if (filtroEstado !== 'todas' && ev.estado !== filtroEstado) return false;
+                return true;
+            });
+
+            const tbodyGlobal = document.getElementById('tabla-global-body');
+            tbodyGlobal.innerHTML = '';
+            if (filtradas.length === 0) {
+                tbodyGlobal.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400 text-sm">No hay evaluaciones disponibles.</td></tr>`;
+                return;
+            }
+
+            filtradas.forEach(ev => {
+                const agInfo = obtenerDatosAgenteDeEvaluacion(ev);
+                const notaColor = ev.calificacion_final >= 85 ? 'text-emerald-600' : (ev.calificacion_final >= 70 ? 'text-amber-600' : 'text-red-600');
+                const fechaCreacionMostrar = new Date(ev.fecha_creacion_inicio || ev.fecha_evaluacion).toLocaleString();
+                const evJson = JSON.stringify(ev).replace(/'/g, "&#39;");
+
+                let badgeEstadoHtml = '';
+                if (ev.estado === 'finalizada') {
+                    badgeEstadoHtml = `<span class="text-xs bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-semibold">Guardado Final</span>`;
+                } else if (ev.estado === 'borrador') {
+                    badgeEstadoHtml = `<span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full font-bold">Borrador</span>`;
+                } else {
+                    badgeEstadoHtml = `<span class="text-xs bg-rose-100 text-rose-800 px-2.5 py-1 rounded-full font-bold">Iniciada</span>`;
+                }
+
+                const puedeEditarBorrar = (ev.qa_id === perfilActual.id || esRolAdminOManager());
+
+                tbodyGlobal.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-3 px-4 font-bold text-blue-700">
+                            <button type="button" onclick='abrirPopUpSoloLectura(${evJson})' class="font-mono hover:underline">#${ev.numero_evaluacion}</button>
+                        </td>
+                        <td class="py-3 px-4 text-xs text-slate-600 font-medium">${fechaCreacionMostrar}</td>
+                        <td class="py-3 px-4"><p class="font-medium">${agInfo.nombre}</p><p class="text-xs text-slate-400">${agInfo.site}</p></td>
+                        <td class="py-3 px-4 text-slate-600">${ev.qa?.nombre_completo || 'N/A'}</td>
+                        <td class="py-3 px-4">
+                            <span class="text-xs bg-slate-100 px-2 py-0.5 rounded font-semibold">${ev.canal}</span>
+                            ${ev.es_calibracion ? `<span class="ml-1 text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold uppercase">Calibración</span>` : ''}
+                            <span class="text-xs text-slate-500 block mt-0.5">${ev.subtipo_evaluacion || ''}</span>
+                        </td>
+                        <td class="py-3 px-4 font-bold ${notaColor}">${Number(ev.calificacion_final).toFixed(1)}%</td>
+                        <td class="py-3 px-4">${badgeEstadoHtml}</td>
+                        <td class="py-3 px-4 text-right space-x-1.5">
+                            <button type="button" onclick='abrirPopUpSoloLectura(${evJson})' class="p-1.5 rounded bg-blue-50 hover:bg-blue-100 text-blue-700"><i data-lucide="eye" class="w-3.5 h-3.5 inline"></i></button>
+                            ${puedeEditarBorrar ? `
+                                <button type="button" onclick='continuarBorrador(${evJson})' class="p-1.5 rounded bg-slate-100 hover:bg-amber-100 text-slate-700"><i data-lucide="pencil" class="w-3.5 h-3.5 inline"></i></button>
+                                <button type="button" onclick='abrirModalEliminar(${evJson})' class="p-1.5 rounded bg-slate-100 hover:bg-red-100 text-slate-700"><i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i></button>
+                            ` : ''}
+                        </td>
+                    </tr>`;
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function continuarBorrador(ev) {
+            mostrarTab('tab-nueva-eval', false);
+            abrirEvaluacionExistente(ev);
+        }
+
+        function poblarCheckboxesQueuesModal() {
+            const cont = document.getElementById('checkboxes-queues-usuario');
+            cont.innerHTML = QUEUES_EVALUACION.map(q => `
+                <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" value="${q.canal}" checked class="chk-queue-permiso rounded text-blue-600">
+                    <span class="text-slate-700 font-medium">${q.canal}</span>
+                </label>
+            `).join('');
+        }
+
+        function autoAsignarQueuesPorNivelRol() {
+            const rolSel = document.getElementById('user-rol').value;
+            const chks = document.querySelectorAll('.chk-queue-permiso');
+            if (!rolSel.startsWith('QA Nivel')) {
+                chks.forEach(c => c.checked = true);
+                return;
+            }
+            const permitidas = PERMISOS_SUBCATEGORIAS_POR_ROL[rolSel] || [];
+            chks.forEach(c => {
+                c.checked = permitidas.includes('ALL') || permitidas.some(p => p.startsWith(`${c.value}::`));
+            });
+        }
+
+        async function cargarCatalogos() {
+            const { data: users } = await sb.from('usuarios').select('*').order('nombre_completo');
+            usuariosCache = users || [];
+
+            const selSup = document.getElementById('user-supervisor');
+            const selMgr = document.getElementById('user-manager');
+            selSup.innerHTML = '<option value="">Sin asignar</option>';
+            selMgr.innerHTML = '<option value="">Sin asignar</option>';
+            usuariosCache.filter(u => ['Supervisor', 'Supervisor QA', 'Team Lead', 'Team_Lead', 'Manager'].includes(u.rol)).forEach(l => {
+                selSup.innerHTML += `<option value="${l.id}">${l.nombre_completo} (${l.rol})</option>`;
+                selMgr.innerHTML += `<option value="${l.id}">${l.nombre_completo} (${l.rol})</option>`;
+            });
+
+            const { data: skills } = await sb.from('skills_campanas').select('*').order('nombre_skill');
+            const selSkill = document.getElementById('eval-skill');
+            const adminSkillsList = document.getElementById('admin-skills-list');
+            selSkill.innerHTML = '';
+            adminSkillsList.innerHTML = '';
+
+
+            const listaSkills = (skills && skills.length > 0) ? skills : CAMPANAS_EJEMPLO_ROSTER;
+            listaSkills.forEach(sk => {
+                if (sk.activa) selSkill.innerHTML += `<option value="${sk.id}">${sk.nombre_skill} (${sk.cliente_asociado})</option>`;
+                adminSkillsList.innerHTML += `
+                    <div class="py-2.5 flex justify-between items-center text-sm">
+                        <div class="pr-2"><span class="font-semibold text-xs block">${sk.nombre_skill}</span> <span class="text-[11px] text-slate-500">${sk.cliente_asociado}</span></div>
+                        <button type="button" onclick="toggleSkill('${sk.id}', ${!sk.activa})" class="px-2.5 py-1 rounded text-xs font-semibold shrink-0 ${sk.activa ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'}">
+                            ${sk.activa ? 'Activo' : 'Inactivo'}
+                        </button>
+                    </div>`;
+            });
+
+            const { data: forms } = await sb.from('formularios_rubricas').select('*').eq('activo', true);
+            rubricasCache = forms || [];
+            const selForm = document.getElementById('eval-form-select');
+            selForm.innerHTML = '';
+            rubricasCache.forEach(f => {
+                selForm.innerHTML += `<option value="${f.id}">${f.nombre_form}</option>`;
+            });
+
+            const adminUsersList = document.getElementById('admin-users-list');
+            adminUsersList.innerHTML = '';
+            usuariosCache.forEach(u => {
+                adminUsersList.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-3">
+                            <p class="font-semibold text-slate-800">${u.nombre_completo}</p>
+                            <p class="text-xs text-slate-500">${u.codigo_empleado} · ${u.correo}</p>
+                        </td>
+                        <td class="py-2.5 px-3"><span class="text-xs font-bold px-2 py-0.5 bg-blue-50 text-blue-700 rounded">${u.rol}</span></td>
+                        <td class="py-2.5 px-3 text-xs text-slate-600">${u.site || 'N/A'}</td>
+                        <td class="py-2.5 px-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full font-semibold ${u.activo ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                                ${u.activo ? 'Activo' : 'Inactivo'}
+                            </span>
+                        </td>
+                        <td class="py-2.5 px-3 text-right">
+                            <button type="button" onclick='abrirModalUsuario(${JSON.stringify(u).replace(/'/g, "&#39;")})' class="text-blue-600 hover:underline text-xs font-semibold">Editar</button>
+                        </td>
+                    </tr>`;
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function abrirModalUsuario(usuario = null) {
+            document.getElementById('user-crud-form').reset();
+            const grupoCreds = document.getElementById('grupo-credenciales-nuevas');
+            const inputCorreo = document.getElementById('user-correo');
+            const inputPass = document.getElementById('user-password');
+            const chks = document.querySelectorAll('.chk-queue-permiso');
+
+            if (usuario) {
+                document.getElementById('modal-user-titulo').textContent = `Editar Usuario: ${usuario.nombre_completo}`;
+                document.getElementById('edit-user-id').value = usuario.id;
+                document.getElementById('user-nombre').value = usuario.nombre_completo;
+                document.getElementById('user-codigo').value = usuario.codigo_empleado;
+                document.getElementById('user-rol').value = usuario.rol;
+                document.getElementById('user-site').value = usuario.site || '';
+                document.getElementById('user-supervisor').value = usuario.supervisor_id || '';
+                document.getElementById('user-manager').value = usuario.manager_id || '';
+                document.getElementById('user-activo').checked = usuario.activo;
+                document.getElementById('user-force-pwd').checked = Boolean(usuario.requiere_cambio_password);
+
+                const autorizadas = Array.isArray(usuario.queues_autorizadas) ? usuario.queues_autorizadas : QUEUES_EVALUACION.map(q => q.canal);
+                chks.forEach(c => c.checked = autorizadas.includes(c.value));
+
+                grupoCreds.classList.add('hidden');
+                inputCorreo.required = false;
+                inputPass.required = false;
+            } else {
+                document.getElementById('modal-user-titulo').textContent = 'Registrar Nuevo Usuario';
+                document.getElementById('edit-user-id').value = '';
+                document.getElementById('user-activo').checked = true;
+                document.getElementById('user-force-pwd').checked = true;
+                chks.forEach(c => c.checked = true);
+
+                grupoCreds.classList.remove('hidden');
+                inputCorreo.required = true;
+                inputPass.required = true;
+            }
+            document.getElementById('modal-usuario').classList.remove('hidden');
+        }
+
+        function cerrarModalUsuario() {
+            document.getElementById('modal-usuario').classList.add('hidden');
+        }
+
+        document.getElementById('user-crud-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-guardar-usuario');
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+
+            const queuesSeleccionadas = Array.from(document.querySelectorAll('.chk-queue-permiso'))
+                .filter(c => c.checked)
+                .map(c => c.value);
+
+            const editId = document.getElementById('edit-user-id').value;
+            const datosPerfil = {
+                nombre_completo: document.getElementById('user-nombre').value,
+                codigo_empleado: document.getElementById('user-codigo').value,
+                rol: document.getElementById('user-rol').value,
+                site: document.getElementById('user-site').value || null,
+                supervisor_id: document.getElementById('user-supervisor').value || null,
+                manager_id: document.getElementById('user-manager').value || null,
+                activo: document.getElementById('user-activo').checked,
+                requiere_cambio_password: document.getElementById('user-force-pwd').checked,
+                queues_autorizadas: queuesSeleccionadas
+            };
+
+            if (editId) {
+                const { error } = await sb.from('usuarios').update(datosPerfil).eq('id', editId);
+                if (error) alert('Error al actualizar: ' + error.message);
+                else { cerrarModalUsuario(); await cargarCatalogos(); }
+            } else {
+                const email = document.getElementById('user-correo').value;
+                const password = document.getElementById('user-password').value;
+                const { data: authData, error: authErr } = await sbRegistro.auth.signUp({
+                    email,
+                    password,
+                    options: { emailRedirectTo: window.location.origin }
+                });
+
+                if (authErr || !authData.user) {
+                    alert('Error creando acceso: ' + (authErr?.message || ''));
+                } else {
+                    const { error: dbErr } = await sb.from('usuarios').insert([{ id: authData.user.id, correo: email, ...datosPerfil }]);
+                    if (dbErr) alert('Error en perfil: ' + dbErr.message);
+                    else {
+                        alert('Usuario creado exitosamente.');
+                        cerrarModalUsuario();
+                        await cargarCatalogos();
+                    }
+                }
+            }
+            btn.disabled = false;
+            btn.textContent = 'Guardar Usuario';
+        });
+
+        document.getElementById('skill-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const skillType = document.getElementById('new-skill-type').value;
+            const nombre_skill = `${document.getElementById('new-skill-name').value} (${skillType})`;
+            const cliente_asociado = document.getElementById('new-skill-client').value;
+            await sb.from('skills_campanas').insert([{ nombre_skill, cliente_asociado }]);
+            document.getElementById('skill-form').reset();
+            await cargarCatalogos();
+        });
+
+        async function toggleSkill(id, estado) {
+            await sb.from('skills_campanas').update({ activa: estado }).eq('id', id);
+            await cargarCatalogos();
+        }
+
+        async function cerrarSesion() {
+            if (perfilActual) {
+                const keyStorage = getStorageKeyUsuario(perfilActual.id);
+                const guardado = JSON.parse(localStorage.getItem(keyStorage) || 'null');
+                if (guardado && guardado.userId === perfilActual.id) {
+                    await registrarTramoTiempo(guardado.etiqueta, guardado.inicioTimestamp, Date.now());
+                }
+                localStorage.removeItem(keyStorage);
+                localStorage.removeItem('gama_active_user_id');
+            }
+            if (canalPestanas && perfilActual) {
+                canalPestanas.postMessage({ type: 'CLOSING', userId: perfilActual.id, tabId: TAB_INSTANCE_ID });
+            }
+            if (intervaloReloj) clearInterval(intervaloReloj);
+            perfilActual = null;
+            document.getElementById('timer-reloj-display').textContent = '00:00:00';
+            await sb.auth.signOut();
+            mostrarVista('landing-view');
+        }
+    </script>
+</body>
+</html>
+
