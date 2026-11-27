@@ -3685,7 +3685,193 @@
             await sb.auth.signOut();
             mostrarVista('landing-view');
         }
+
+        // =========================================================================
+        // SISTEMA DE AUTOGUARDADO SILENCIOSO CADA 5 MINUTOS (SOLO EN CREAR/EDITAR)
+        // =========================================================================
+        let intervaloAutoguardado5Min = null;
+        let hayCambiosSinGuardar = false;
+        let autoguardadoEnCurso = false;
+
+        function mostrarAvisoDiscretoAutoguardado(mensaje) {
+            const toast = document.getElementById('toast-autoguardado');
+            const texto = document.getElementById('toast-autoguardado-texto');
+            if (!toast || !texto) return;
+
+            texto.textContent = mensaje;
+            toast.classList.remove('hidden');
+
+            clearTimeout(toast._hideTimer);
+            toast._hideTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        function esPantallaDeEdicionActiva() {
+            const tabNuevaEval = document.getElementById('tab-nueva-eval');
+            const contFormEval = document.getElementById('contenedor-form-eval');
+            return Boolean(
+                tabNuevaEval &&
+                !tabNuevaEval.classList.contains('hidden') &&
+                contFormEval &&
+                !contFormEval.classList.contains('hidden')
+            );
+        }
+
+        function detenerRelojAutoguardado() {
+            if (intervaloAutoguardado5Min) {
+                clearInterval(intervaloAutoguardado5Min);
+                intervaloAutoguardado5Min = null;
+            }
+            hayCambiosSinGuardar = false;
+        }
+
+        function iniciarRelojAutoguardado() {
+            detenerRelojAutoguardado();
+            const CINCO_MINUTOS_MS = 5 * 60 * 1000;
+
+            intervaloAutoguardado5Min = setInterval(async () => {
+                if (!esPantallaDeEdicionActiva()) {
+                    detenerRelojAutoguardado();
+                    return;
+                }
+
+                if (!hayCambiosSinGuardar || autoguardadoEnCurso) return;
+
+                await ejecutarAutoguardadoSilencioso();
+            }, CINCO_MINUTOS_MS);
+        }
+
+        async function ejecutarAutoguardadoSilencioso() {
+            const evalId = document.getElementById('eval-id-registro')?.value;
+            if (!evalId || !perfilActual) return;
+
+            autoguardadoEnCurso = true;
+            try {
+                const rosterCod = document.getElementById('eval-agente')?.value || null;
+                const agRosterObj = ROSTER_DATA_PRUEBA.find(x => x.codigo === rosterCod);
+
+                const rawSkillId = document.getElementById('eval-skill')?.value || null;
+                const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+                const skillId = (rawSkillId && uuidRegex.test(rawSkillId)) ? rawSkillId : null;
+                const formId = document.getElementById('eval-form-select')?.value || null;
+                const idAudio = document.getElementById('eval-id-audio')?.value.trim() || null;
+                const fechaInteraccionVal = document.getElementById('eval-fecha-interaccion')?.value;
+                const feedbackGeneral = document.getElementById('eval-feedback')?.value.trim();
+
+                const calc = recalcularPuntaje();
+                const selecciones = [];
+                let defectos = 0;
+                const comentariosEls = document.querySelectorAll('.criterio-comentario');
+
+                document.querySelectorAll('.criterio-select').forEach((sel, i) => {
+                    const item = criterioActualItems[sel.dataset.idx];
+                    if (!item) return;
+                    const comentario = comentariosEls[i] ? comentariosEls[i].value : '';
+                    if (sel.value === 'no_cumple') defectos++;
+                    selecciones.push({
+                        id: item.id,
+                        descripcion: item.descripcion,
+                        resultado: sel.value,
+                        tipo: item.tipo,
+                        peso: item.peso,
+                        comentario: comentario
+                    });
+                });
+
+                const rosterMetaStr = agRosterObj
+                    ? `ROSTER:${agRosterObj.codigo} | ${agRosterObj.nombre} | Sup: ${agRosterObj.supervisor} | Site: ${agRosterObj.site}`
+                    : null;
+
+                const badgeEstado = document.getElementById('badge-estado-form');
+                const estadoActual = (badgeEstado && badgeEstado.textContent.includes('Final')) ? 'finalizada' : 'borrador';
+
+                const registroSilencioso = {
+                    skill_id: skillId,
+                    formulario_id: formId,
+                    es_calibracion: document.getElementById('eval-es-calibracion')?.checked || false,
+                    estado: estadoActual,
+                    fecha_interaccion: fechaInteraccionVal ? new Date(fechaInteraccionVal).toISOString() : null,
+                    id_interaccion_audio: idAudio,
+                    evidencia_url_o_texto: rosterMetaStr,
+                    selecciones_criterios: selecciones,
+                    puntaje_ponderado: calc.ponderado,
+                    falla_critica: calc.hayAutoFail,
+                    calificacion_final: calc.final,
+                    defectos_contados: defectos,
+                    oportunidades_defecto: criterioActualItems.length,
+                    hallazgo_causa_raiz: document.getElementById('eval-causa-raiz')?.value || null,
+                    feedback_texto: feedbackGeneral || null
+                };
+
+                const { error } = await sb.from('evaluaciones')
+                    .update(registroSilencioso)
+                    .eq('id', evalId);
+
+                if (!error) {
+                    hayCambiosSinGuardar = false;
+
+                    if (estadoActual === 'borrador' && badgeEstado) {
+                        badgeEstado.textContent = 'Guardada (Borrador)';
+                        badgeEstado.className = 'bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full';
+                    }
+
+                    const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    mostrarAvisoDiscretoAutoguardado(`Guardado automáticamente (${hora})`);
+                }
+            } catch (err) {
+                // Falla silenciosa para no interrumpir al usuario
+            } finally {
+                autoguardadoEnCurso = false;
+            }
+        }
+
+        const formEvalElemento = document.getElementById('eval-form');
+        if (formEvalElemento) {
+            ['input', 'change'].forEach(evento => {
+                formEvalElemento.addEventListener(evento, () => {
+                    if (esPantallaDeEdicionActiva()) {
+                        hayCambiosSinGuardar = true;
+                        if (!intervaloAutoguardado5Min) {
+                            iniciarRelojAutoguardado();
+                        }
+                    }
+                });
+            });
+        }
+
+        const _abrirEvaluacionExistenteOriginal = abrirEvaluacionExistente;
+        abrirEvaluacionExistente = function(evalObj) {
+            _abrirEvaluacionExistenteOriginal(evalObj);
+            hayCambiosSinGuardar = false;
+            iniciarRelojAutoguardado();
+        };
+
+        const _volverAlHubCategoriasOriginal = volverAlHubCategorias;
+        volverAlHubCategorias = function(reiniciarTimer = true) {
+            detenerRelojAutoguardado();
+            _volverAlHubCategoriasOriginal(reiniciarTimer);
+        };
+
+        const _mostrarTabOriginal = mostrarTab;
+        mostrarTab = function(tabId, forzarReinicioCero = false) {
+            if (tabId !== 'tab-nueva-eval') {
+                detenerRelojAutoguardado();
+            }
+            _mostrarTabOriginal(tabId, forzarReinicioCero);
+        };
+
+        const _procesarGuardadoEvaluacionOriginal = procesarGuardadoEvaluacion;
+        procesarGuardadoEvaluacion = async function(estadoDestino) {
+            hayCambiosSinGuardar = false;
+            await _procesarGuardadoEvaluacionOriginal(estadoDestino);
+        };
     </script>
+
+    <div id="toast-autoguardado" class="hidden fixed bottom-4 right-4 z-50 bg-slate-900/90 text-slate-200 border border-slate-700 px-3.5 py-2 rounded-xl shadow-lg text-xs font-medium flex items-center gap-2 transition-opacity duration-300 pointer-events-none">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="toast-autoguardado-texto">Guardado automáticamente</span>
+    </div>
 
 </body>
 </html>
